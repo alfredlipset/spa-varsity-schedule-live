@@ -6,7 +6,7 @@ window.SPA_SCHEDULE_CONFIG = {
   // Daily player survey link for quick check-ins.
   playerSurvey: {
     title: "Daily Player Survey",
-    url: "https://docs.google.com/forms/d/e/1FAIpQLSe4cWpH9Htqx0InTRLvjx8AGlShH8YoPYQ0O0TvAZK4nh_Qfw/viewform",
+    url: "",
     notes: "60-second daily wellness check-in before training."
   },
   // Add the team's Instagram profile URL here.

@@ -931,7 +931,7 @@ function renderPlayerSurvey() {
   if (!survey.url) {
     playerSurveyListEl.innerHTML = `
       <div class="empty-state">
-        Add the daily survey link inside <code>playerSurvey</code> in <code>schedule-config.js</code>.
+        The daily wellness survey link will be posted here once it is ready.
       </div>
     `;
     return;
