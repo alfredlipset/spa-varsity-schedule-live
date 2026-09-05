@@ -317,7 +317,7 @@
       text-transform: uppercase;
     }
 
-    .field input,
+    .field input:not([type="checkbox"]),
     .field select {
       width: 100%;
       min-height: 48px;
@@ -417,11 +417,19 @@
       background: rgba(239, 232, 217, 0.4);
     }
 
-    .consent-row input {
-      margin-top: 3px;
+    .consent-row input[type="checkbox"] {
+      flex: 0 0 20px;
+      width: 20px;
+      min-width: 20px;
+      height: 20px;
+      min-height: 20px;
+      margin: 2px 0 0;
+      accent-color: var(--green);
     }
 
     .consent-row label {
+      flex: 1;
+      min-width: 0;
       margin: 0;
       color: var(--ink);
       font: 600 0.95rem/1.45 "Avenir Next", Avenir, sans-serif;
@@ -707,16 +715,6 @@
       </div>
     </section>
 
-    <section class="panel panel-pad" style="margin-top: 18px;">
-      <div class="panel-head">
-        <div>
-          <div class="panel-kicker">Snapshot</div>
-          <h2>Season view</h2>
-        </div>
-      </div>
-      <div class="stats-grid" id="statsGrid"></div>
-    </section>
-
     <section class="utility-grid">
       <div class="panel panel-pad utility-card">
         <div class="utility-copy">
@@ -738,69 +736,19 @@
         </div>
         <div class="status-line" id="calendarStatus"></div>
       </div>
-
       <div class="panel panel-pad utility-card">
-        <div class="utility-copy">
-          <div class="panel-kicker">Text Alerts</div>
-          <h2>Turn on schedule change texts</h2>
-          <p>
-            Parents and players can opt in to SMS alerts when a practice or game is added, moved, canceled, or edited.
-          </p>
+        <div class="panel-head">
+          <div>
+            <div class="panel-kicker">Game Videos</div>
+            <h2>Film library</h2>
+          </div>
+          <div class="status-line" id="gameVideosCount"></div>
         </div>
-        <form id="smsForm" method="post" target="smsSignupFrame" novalidate>
-          <input type="hidden" name="action" value="subscribe" />
-          <input type="hidden" id="requestIdInput" name="requestId" value="" />
-          <input type="hidden" id="originInput" name="origin" value="" />
-          <div class="alert-grid">
-            <div class="field">
-              <label for="subscriberName">Name</label>
-              <input id="subscriberName" name="name" type="text" placeholder="Parent or player name" autocomplete="name" />
-            </div>
-            <div class="field">
-              <label for="subscriberPhone">Mobile Number</label>
-              <input id="subscriberPhone" name="phone" type="tel" placeholder="651-555-1234" autocomplete="tel" />
-            </div>
-            <div class="field full">
-              <label for="alertType">Alert Type</label>
-              <select id="alertType" name="alertType">
-                <option value="all">Practice and game changes</option>
-                <option value="games">Games only</option>
-                <option value="practices">Practices only</option>
-              </select>
-            </div>
-            <div class="field full">
-              <div class="consent-row">
-                <input id="smsConsent" name="consent" type="checkbox" value="yes" />
-                <label for="smsConsent">
-                  I want schedule update texts for SPA boys varsity soccer and understand standard carrier messaging rates may apply.
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="action-row">
-            <button id="smsSubscribeButton" type="submit">Turn On Text Alerts</button>
-          </div>
-        </form>
-        <div class="status-line" id="smsStatus"></div>
-        <p class="status-note">
-          The alert service stores only the contact details needed for schedule texts and uses the live sheet as the source of truth.
+        <div class="resource-list" id="gameVideosList"></div>
+        <p class="footer-note">
+          Add or update links in <code>schedule-config.js</code> as new game film is posted.
         </p>
-        <iframe id="smsSignupFrame" name="smsSignupFrame" title="SMS signup transport" hidden></iframe>
       </div>
-    </section>
-
-    <section class="panel panel-pad" style="margin-top: 18px;">
-      <div class="panel-head">
-        <div>
-          <div class="panel-kicker">Game Videos</div>
-          <h2>Film library</h2>
-        </div>
-        <div class="status-line" id="gameVideosCount"></div>
-      </div>
-      <div class="resource-list" id="gameVideosList"></div>
-      <p class="footer-note">
-        Add or update links in <code>schedule-config.js</code> as new game film is posted.
-      </p>
     </section>
 
     <section class="panel panel-pad" style="margin-top: 18px;">
@@ -849,6 +797,65 @@
       <p class="footer-note">
         If there is ever a conflict, the Google Sheet remains the source of truth for last-minute updates.
       </p>
+    </section>
+
+    <section class="panel panel-pad" style="margin-top: 18px;">
+      <div class="panel-head">
+        <div>
+          <div class="panel-kicker">Snapshot</div>
+          <h2>Season view</h2>
+        </div>
+      </div>
+      <div class="stats-grid" id="statsGrid"></div>
+    </section>
+
+    <section class="panel panel-pad utility-card" style="margin-top: 18px;">
+      <div class="utility-copy">
+        <div class="panel-kicker">Text Alerts</div>
+        <h2>Turn on schedule change texts</h2>
+        <p>
+          Parents and players can opt in to SMS alerts when a practice or game is added, moved, canceled, or edited.
+        </p>
+      </div>
+      <form id="smsForm" method="post" target="smsSignupFrame" novalidate>
+        <input type="hidden" name="action" value="subscribe" />
+        <input type="hidden" id="requestIdInput" name="requestId" value="" />
+        <input type="hidden" id="originInput" name="origin" value="" />
+        <div class="alert-grid">
+          <div class="field">
+            <label for="subscriberName">Name</label>
+            <input id="subscriberName" name="name" type="text" placeholder="Parent or player name" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="subscriberPhone">Mobile Number</label>
+            <input id="subscriberPhone" name="phone" type="tel" placeholder="651-555-1234" autocomplete="tel" />
+          </div>
+          <div class="field full">
+            <label for="alertType">Alert Type</label>
+            <select id="alertType" name="alertType">
+              <option value="all">Practice and game changes</option>
+              <option value="games">Games only</option>
+              <option value="practices">Practices only</option>
+            </select>
+          </div>
+          <div class="field full">
+            <div class="consent-row">
+              <input id="smsConsent" name="consent" type="checkbox" value="yes" />
+              <label for="smsConsent">
+                I want schedule update texts for SPA boys varsity soccer and understand standard carrier messaging rates may apply.
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="action-row">
+          <button id="smsSubscribeButton" type="submit">Turn On Text Alerts</button>
+        </div>
+      </form>
+      <div class="status-line" id="smsStatus"></div>
+      <p class="status-note">
+        The alert service stores only the contact details needed for schedule texts and uses the live sheet as the source of truth.
+      </p>
+      <iframe id="smsSignupFrame" name="smsSignupFrame" title="SMS signup transport" hidden></iframe>
     </section>
   </main>
 
