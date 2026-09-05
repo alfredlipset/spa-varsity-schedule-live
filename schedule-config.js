@@ -4,10 +4,10 @@ window.SPA_SCHEDULE_CONFIG = {
   // 2. SMS schedule change sign-ups
   serviceUrl: "",
   // Add the team's Instagram profile URL here.
-  instagramProfileUrl: "",
+  instagramProfileUrl: "https://www.instagram.com/p/DcuXRJ4RNGa/",
   // Optional: add a supported embed/widget URL here for an inline feed.
   // A normal Instagram profile URL usually cannot be embedded directly.
-  instagramEmbedUrl: "",
+  instagramEmbedUrl: "https://www.instagram.com/p/DcuXRJ4RNGa/",
   gameVideos: [
     {
       title: "Providence Academy",

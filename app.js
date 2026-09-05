@@ -616,10 +616,44 @@ function canInlineInstagramEmbed(value) {
 
   const url = new URL(normalized);
   const host = url.hostname.replace(/^www\./i, "");
-  if (host.endsWith("instagram.com") && !url.pathname.includes("/embed")) {
+  if (host.endsWith("instagram.com")) {
+    const trimmedPath = url.pathname.replace(/\/+$/, "");
+    if (trimmedPath.includes("/embed")) {
+      return `${url.origin}${trimmedPath}${url.search}`;
+    }
+    if (/^\/(p|reel|tv)\/[^/]+$/i.test(trimmedPath)) {
+      return `${url.origin}${trimmedPath}/embed/captioned`;
+    }
     return "";
   }
   return normalized;
+}
+
+function instagramLinkMeta(value) {
+  const normalized = normalizeExternalUrl(value);
+  if (!normalized) {
+    return {
+      url: "",
+      label: "Open Team Instagram",
+      status: "Instagram section added and ready for a profile link or embed URL."
+    };
+  }
+
+  const url = new URL(normalized);
+  const trimmedPath = url.pathname.replace(/\/+$/, "");
+  if (/^\/(p|reel|tv)\/[^/]+$/i.test(trimmedPath)) {
+    return {
+      url: `${url.origin}${trimmedPath}/`,
+      label: "Open Instagram Post",
+      status: "Instagram post is linked and ready."
+    };
+  }
+
+  return {
+    url: normalized,
+    label: "Open Team Instagram",
+    status: "Direct profile link is active. Standard Instagram profile URLs usually do not allow full-page embedding."
+  };
 }
 
 function normalizeGameVideos(records) {
@@ -633,11 +667,11 @@ function normalizeGameVideos(records) {
 }
 
 function renderInstagram() {
-  const profileUrl = normalizeExternalUrl(INSTAGRAM_PROFILE_URL);
+  const linkMeta = instagramLinkMeta(INSTAGRAM_PROFILE_URL);
   const embedUrl = canInlineInstagramEmbed(INSTAGRAM_EMBED_URL);
 
-  instagramLinksEl.innerHTML = profileUrl
-    ? `<a class="button-link" href="${escapeHtml(profileUrl)}" target="_blank" rel="noreferrer">Open Team Instagram</a>`
+  instagramLinksEl.innerHTML = linkMeta.url
+    ? `<a class="button-link" href="${escapeHtml(linkMeta.url)}" target="_blank" rel="noreferrer">${escapeHtml(linkMeta.label)}</a>`
     : "";
 
   if (embedUrl) {
@@ -650,11 +684,11 @@ function renderInstagram() {
         referrerpolicy="strict-origin-when-cross-origin"
       ></iframe>
     `;
-    instagramStatusEl.textContent = "Embedded Instagram view is active.";
+    instagramStatusEl.textContent = "Embedded Instagram post is active.";
     return;
   }
 
-  if (profileUrl) {
+  if (linkMeta.url) {
     instagramEmbedEl.innerHTML = `
       <div class="instagram-placeholder">
         <strong>Instagram link is ready</strong>
@@ -663,7 +697,7 @@ function renderInstagram() {
         </p>
       </div>
     `;
-    instagramStatusEl.textContent = "Direct profile link is active. Standard Instagram profile URLs usually do not allow full-page embedding.";
+    instagramStatusEl.textContent = linkMeta.status;
     return;
   }
 
