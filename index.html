@@ -276,6 +276,52 @@
       margin-top: 18px;
     }
 
+    .instagram-layout {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .instagram-shell {
+      min-width: 0;
+    }
+
+    .instagram-frame {
+      min-height: 420px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(247, 241, 231, 0.92)),
+        radial-gradient(circle at top right, rgba(182, 146, 83, 0.12), transparent 30%);
+      overflow: hidden;
+    }
+
+    .instagram-embed {
+      width: 100%;
+      min-height: 420px;
+      border: 0;
+      background: var(--paper);
+    }
+
+    .instagram-placeholder {
+      display: grid;
+      align-content: center;
+      gap: 10px;
+      min-height: 420px;
+      padding: 24px;
+    }
+
+    .instagram-placeholder strong {
+      font-size: 1.2rem;
+      line-height: 1.1;
+    }
+
+    .instagram-placeholder p {
+      margin: 0;
+      color: var(--muted);
+    }
+
     .utility-card {
       display: grid;
       gap: 16px;
@@ -633,6 +679,7 @@
     }
 
     @media (max-width: 1024px) {
+      .instagram-layout,
       .section-grid,
       .utility-grid,
       .toolbar,
@@ -690,6 +737,23 @@
         <div class="pill" id="dataStatus">Loading live schedule...</div>
         <a class="meta-link" id="sheetLink" href="#" target="_blank" rel="noreferrer">Open Google Sheet</a>
         <a class="meta-link" id="csvLink" href="#" target="_blank" rel="noreferrer">Download CSV</a>
+      </div>
+    </section>
+
+    <section class="panel panel-pad" style="margin-top: 18px;">
+      <div class="instagram-layout">
+        <div class="utility-copy">
+          <div class="panel-kicker">Team Instagram</div>
+          <h2>Social updates at the top of the page</h2>
+          <p>
+            Use this space for the team Instagram presence. Add the normal profile link now, and drop in a supported embed URL later if you want the feed to render inside the page.
+          </p>
+          <div class="button-row" id="instagramLinks"></div>
+          <div class="status-line" id="instagramStatus"></div>
+        </div>
+        <div class="instagram-shell">
+          <div class="instagram-frame" id="instagramEmbed"></div>
+        </div>
       </div>
     </section>
 

@@ -3,6 +3,11 @@ window.SPA_SCHEDULE_CONFIG = {
   // 1. live Apple/Google calendar subscriptions
   // 2. SMS schedule change sign-ups
   serviceUrl: "",
+  // Add the team's Instagram profile URL here.
+  instagramProfileUrl: "",
+  // Optional: add a supported embed/widget URL here for an inline feed.
+  // A normal Instagram profile URL usually cannot be embedded directly.
+  instagramEmbedUrl: "",
   gameVideos: [
     {
       title: "Providence Academy",

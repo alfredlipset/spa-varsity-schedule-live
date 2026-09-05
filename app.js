@@ -3,6 +3,8 @@ const CSV_URL = "https://docs.google.com/spreadsheets/d/1T5_MEg9U-CFIYcJ9FBcoAd2
 const DISPLAY_TIME_ZONE = "America/Chicago";
 const SCHEDULE_CONFIG = window.SPA_SCHEDULE_CONFIG || {};
 const SERVICE_URL = typeof SCHEDULE_CONFIG.serviceUrl === "string" ? SCHEDULE_CONFIG.serviceUrl.trim() : "";
+const INSTAGRAM_PROFILE_URL = typeof SCHEDULE_CONFIG.instagramProfileUrl === "string" ? SCHEDULE_CONFIG.instagramProfileUrl.trim() : "";
+const INSTAGRAM_EMBED_URL = typeof SCHEDULE_CONFIG.instagramEmbedUrl === "string" ? SCHEDULE_CONFIG.instagramEmbedUrl.trim() : "";
 const GAME_VIDEOS = Array.isArray(SCHEDULE_CONFIG.gameVideos) ? SCHEDULE_CONFIG.gameVideos : [];
 let parsedServiceUrl = null;
 try {
@@ -100,6 +102,9 @@ const state = {
 const sheetLinkEl = document.getElementById("sheetLink");
 const csvLinkEl = document.getElementById("csvLink");
 const dataStatusEl = document.getElementById("dataStatus");
+const instagramLinksEl = document.getElementById("instagramLinks");
+const instagramStatusEl = document.getElementById("instagramStatus");
+const instagramEmbedEl = document.getElementById("instagramEmbed");
 const downloadCalendarButtonEl = document.getElementById("downloadCalendarButton");
 const appleCalendarLinkEl = document.getElementById("appleCalendarLink");
 const googleCalendarButtonEl = document.getElementById("googleCalendarButton");
@@ -591,6 +596,32 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+function normalizeExternalUrl(value) {
+  try {
+    const url = new URL(String(value || "").trim());
+    if (url.protocol !== "https:") {
+      return "";
+    }
+    return url.toString();
+  } catch (error) {
+    return "";
+  }
+}
+
+function canInlineInstagramEmbed(value) {
+  const normalized = normalizeExternalUrl(value);
+  if (!normalized) {
+    return "";
+  }
+
+  const url = new URL(normalized);
+  const host = url.hostname.replace(/^www\./i, "");
+  if (host.endsWith("instagram.com") && !url.pathname.includes("/embed")) {
+    return "";
+  }
+  return normalized;
+}
+
 function normalizeGameVideos(records) {
   return records
     .map((record) => ({
@@ -599,6 +630,52 @@ function normalizeGameVideos(records) {
       notes: String(record?.notes || "").trim()
     }))
     .filter((record) => record.title && record.url);
+}
+
+function renderInstagram() {
+  const profileUrl = normalizeExternalUrl(INSTAGRAM_PROFILE_URL);
+  const embedUrl = canInlineInstagramEmbed(INSTAGRAM_EMBED_URL);
+
+  instagramLinksEl.innerHTML = profileUrl
+    ? `<a class="button-link" href="${escapeHtml(profileUrl)}" target="_blank" rel="noreferrer">Open Team Instagram</a>`
+    : "";
+
+  if (embedUrl) {
+    instagramEmbedEl.innerHTML = `
+      <iframe
+        class="instagram-embed"
+        src="${escapeHtml(embedUrl)}"
+        title="SPA boys varsity soccer Instagram"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+    `;
+    instagramStatusEl.textContent = "Embedded Instagram view is active.";
+    return;
+  }
+
+  if (profileUrl) {
+    instagramEmbedEl.innerHTML = `
+      <div class="instagram-placeholder">
+        <strong>Instagram link is ready</strong>
+        <p>
+          The page now has a dedicated Instagram spot at the top. Add a supported widget or embed URL to <code>instagramEmbedUrl</code> in <code>schedule-config.js</code> if you want posts to render inline.
+        </p>
+      </div>
+    `;
+    instagramStatusEl.textContent = "Direct profile link is active. Standard Instagram profile URLs usually do not allow full-page embedding.";
+    return;
+  }
+
+  instagramEmbedEl.innerHTML = `
+    <div class="instagram-placeholder">
+      <strong>Add the team Instagram page here</strong>
+      <p>
+        Set <code>instagramProfileUrl</code> in <code>schedule-config.js</code> to show the team page here. If you later have a supported embed URL, add <code>instagramEmbedUrl</code> too.
+      </p>
+    </div>
+  `;
+  instagramStatusEl.textContent = "Instagram section added and ready for a profile link or embed URL.";
 }
 
 function mapLink(location) {
@@ -899,6 +976,7 @@ function renderMeta() {
 function syncUi() {
   applyFilters();
   renderMeta();
+  renderInstagram();
   renderCalendarControls();
   renderNextCard();
   renderWeekStack();
