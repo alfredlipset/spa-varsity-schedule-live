@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SPA Boys Varsity Soccer 2026 Schedule</title>
+  <meta
+    name="description"
+    content="Live SPA Boys Varsity Soccer 2026 schedule for parents and players, synced from the team Google Sheet."
+  />
+  <style>
+    :root {
+      --bg: #efe8d9;
+      --paper: #fffaf0;
+      --paper-strong: #fffdf7;
+      --ink: #13231b;
+      --muted: #536157;
+      --line: rgba(19, 35, 27, 0.12);
+      --line-strong: rgba(19, 35, 27, 0.2);
+      --green: #164734;
+      --green-deep: #0f2e22;
+      --gold: #b69253;
+      --gold-soft: #efe1c2;
+      --rose: #a6493a;
+      --sky: #d8e6ea;
+      --shadow: 0 22px 48px rgba(13, 29, 22, 0.11);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font: 16px/1.5 "Avenir Next", Avenir, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(182, 146, 83, 0.24), transparent 26%),
+        radial-gradient(circle at top right, rgba(22, 71, 52, 0.12), transparent 24%),
+        linear-gradient(180deg, #f4ede0 0%, var(--bg) 38%, #f7f1e7 100%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 16px 56px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      color: #f7f3ea;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(239, 225, 194, 0.28), transparent 18%),
+        linear-gradient(135deg, rgba(15, 46, 34, 0.98), rgba(22, 71, 52, 0.96) 48%, rgba(33, 87, 65, 0.96));
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -120px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(182, 146, 83, 0.55), rgba(182, 146, 83, 0));
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: rgba(247, 243, 234, 0.74);
+      font: 700 0.76rem/1 "Avenir Next", Avenir, sans-serif;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(2.4rem, 4vw, 4.6rem);
+      line-height: 0.94;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin-top: 14px;
+      color: rgba(247, 243, 234, 0.86);
+      font-size: 1rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill,
+    .meta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(247, 243, 234, 0.16);
+      background: rgba(247, 243, 234, 0.08);
+      color: #f7f3ea;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+    }
+
+    .meta-link:hover {
+      background: rgba(247, 243, 234, 0.14);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 253, 247, 0.88);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .panel-pad {
+      padding: 20px;
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .panel-kicker {
+      color: var(--muted);
+      font: 700 0.76rem/1 "Avenir Next", Avenir, sans-serif;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .next-card {
+      padding: 22px;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255, 250, 240, 0.96), rgba(246, 239, 226, 0.96)),
+        linear-gradient(135deg, rgba(182, 146, 83, 0.08), rgba(22, 71, 52, 0.06));
+      border: 1px solid rgba(19, 35, 27, 0.08);
+    }
+
+    .next-status {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      color: var(--green-deep);
+      font: 700 0.75rem/1 "Avenir Next", Avenir, sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .next-title {
+      margin-top: 14px;
+      font-size: clamp(1.7rem, 2.5vw, 2.4rem);
+      line-height: 1;
+    }
+
+    .next-subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .next-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .meta-block {
+      padding: 14px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--muted);
+      font: 700 0.72rem/1 "Avenir Next", Avenir, sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .meta-value {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .week-stack,
+    .stats-grid,
+    .event-stack,
+    .day-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .week-card {
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(247, 241, 231, 0.92));
+    }
+
+    .week-card strong {
+      display: block;
+      font-size: 1rem;
+    }
+
+    .week-card span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .utility-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .utility-card {
+      display: grid;
+      gap: 16px;
+    }
+
+    .utility-copy p,
+    .status-copy {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .stat-card {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .stat-number {
+      display: block;
+      margin-top: 6px;
+      color: var(--green);
+      font: 700 clamp(1.5rem, 3vw, 2.3rem)/1 "Avenir Next", Avenir, sans-serif;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.3fr repeat(3, minmax(0, 0.8fr)) auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font: 700 0.74rem/1 "Avenir Next", Avenir, sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      background: var(--paper-strong);
+      color: var(--ink);
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .calendar-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button,
+    .button-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 0;
+      background: var(--green);
+      color: #f7f3ea;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 160ms ease, background 160ms ease, opacity 160ms ease;
+    }
+
+    button.secondary,
+    .button-link.secondary {
+      background: #e7ddc9;
+      color: var(--ink);
+    }
+
+    button:hover,
+    .button-link:hover {
+      transform: translateY(-1px);
+    }
+
+    button:disabled,
+    .button-link.disabled {
+      opacity: 0.56;
+      cursor: not-allowed;
+      pointer-events: none;
+      transform: none;
+    }
+
+    .feed-row {
+      display: grid;
+      gap: 8px;
+    }
+
+    .feed-row input {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      background: var(--paper-strong);
+      color: var(--ink);
+    }
+
+    .status-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .alert-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .alert-grid .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .consent-row {
+      display: flex;
+      gap: 10px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(239, 232, 217, 0.4);
+    }
+
+    .consent-row input {
+      margin-top: 3px;
+    }
+
+    .consent-row label {
+      margin: 0;
+      color: var(--ink);
+      font: 600 0.95rem/1.45 "Avenir Next", Avenir, sans-serif;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .status-line.error {
+      color: var(--rose);
+    }
+
+    .status-line {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .schedule-wrap {
+      margin-top: 18px;
+    }
+
+    .schedule-intro {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 14px;
+    }
+
+    .schedule-intro p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .day-card {
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 253, 247, 0.98), rgba(247, 240, 228, 0.94));
+      box-shadow: 0 12px 28px rgba(13, 29, 22, 0.06);
+    }
+
+    .day-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    .day-date {
+      font-size: 1.35rem;
+    }
+
+    .day-badge {
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: var(--sky);
+      color: var(--green-deep);
+      font: 700 0.76rem/1 "Avenir Next", Avenir, sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .event-card {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .event-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .event-title {
+      font-size: 1.1rem;
+      line-height: 1.1;
+    }
+
+    .event-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f3ecdf;
+      color: var(--green-deep);
+      font: 700 0.72rem/1 "Avenir Next", Avenir, sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tag.game {
+      background: #f7ddd7;
+      color: #6a2419;
+    }
+
+    .tag.practice {
+      background: #dde9df;
+    }
+
+    .tag.meeting {
+      background: #dfe6f2;
+      color: #1e3861;
+    }
+
+    .tag.tryout {
+      background: #f0e1bf;
+      color: #66460d;
+    }
+
+    .event-time {
+      color: var(--green);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .detail-block {
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(239, 232, 217, 0.52);
+      border: 1px solid rgba(19, 35, 27, 0.06);
+    }
+
+    .detail-block.empty {
+      display: none;
+    }
+
+    .detail-text {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini-link {
+      color: var(--green);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .empty-state {
+      padding: 28px;
+      border-radius: 22px;
+      text-align: center;
+      border: 1px dashed var(--line-strong);
+      color: var(--muted);
+      background: rgba(255, 253, 247, 0.72);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1024px) {
+      .section-grid,
+      .utility-grid,
+      .toolbar,
+      .stats-grid,
+      .next-meta,
+      .detail-grid,
+      .alert-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        padding: 16px 12px 40px;
+      }
+
+      .hero,
+      .panel-pad,
+      .next-card,
+      .day-card,
+      .event-card {
+        padding: 18px;
+      }
+
+      .schedule-intro,
+      .day-head,
+      .event-top {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .pill,
+      .meta-link,
+      button,
+      .button-link {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">SPA Boys Varsity Soccer</p>
+      <h1>One clean place for the current 2026 schedule.</h1>
+      <p class="hero-copy">
+        Parents and players can check the next event, scan the week, and review full details without digging through the sheet.
+      </p>
+      <div class="hero-meta">
+        <div class="pill" id="dataStatus">Loading live schedule...</div>
+        <a class="meta-link" id="sheetLink" href="#" target="_blank" rel="noreferrer">Open Google Sheet</a>
+        <a class="meta-link" id="csvLink" href="#" target="_blank" rel="noreferrer">Download CSV</a>
+      </div>
+    </section>
+
+    <section class="section-grid">
+      <div class="panel panel-pad">
+        <div class="panel-head">
+          <div>
+            <div class="panel-kicker">Next Up</div>
+            <h2 id="nextHeading">Checking the upcoming schedule</h2>
+          </div>
+        </div>
+        <div class="next-card" id="nextCard"></div>
+      </div>
+
+      <div class="panel panel-pad">
+        <div class="panel-head">
+          <div>
+            <div class="panel-kicker">Week At A Glance</div>
+            <h2>Coming up soon</h2>
+          </div>
+        </div>
+        <div class="week-stack" id="weekStack"></div>
+      </div>
+    </section>
+
+    <section class="panel panel-pad" style="margin-top: 18px;">
+      <div class="panel-head">
+        <div>
+          <div class="panel-kicker">Snapshot</div>
+          <h2>Season view</h2>
+        </div>
+      </div>
+      <div class="stats-grid" id="statsGrid"></div>
+    </section>
+
+    <section class="utility-grid">
+      <div class="panel panel-pad utility-card">
+        <div class="utility-copy">
+          <div class="panel-kicker">Calendar Access</div>
+          <h2>Bring the full schedule into your calendar</h2>
+          <p>
+            Download the season as an iCal file, or subscribe to the live feed for Apple Calendar and Google Calendar once the schedule service is active.
+          </p>
+        </div>
+        <div class="calendar-buttons">
+          <button id="downloadCalendarButton" type="button">Download for Outlook / iCal</button>
+          <a id="appleCalendarLink" class="button-link secondary disabled" href="#">Apple Calendar</a>
+          <button id="googleCalendarButton" class="secondary" type="button">Google Calendar</button>
+          <button id="copyFeedButton" class="secondary" type="button">Copy Live Feed URL</button>
+        </div>
+        <div class="feed-row">
+          <label class="panel-kicker" for="feedUrlInput">Live Feed URL</label>
+          <input id="feedUrlInput" type="text" readonly value="" />
+        </div>
+        <div class="status-line" id="calendarStatus"></div>
+      </div>
+
+      <div class="panel panel-pad utility-card">
+        <div class="utility-copy">
+          <div class="panel-kicker">Text Alerts</div>
+          <h2>Turn on schedule change texts</h2>
+          <p>
+            Parents and players can opt in to SMS alerts when a practice or game is added, moved, canceled, or edited.
+          </p>
+        </div>
+        <form id="smsForm" method="post" target="smsSignupFrame" novalidate>
+          <input type="hidden" name="action" value="subscribe" />
+          <input type="hidden" id="requestIdInput" name="requestId" value="" />
+          <input type="hidden" id="originInput" name="origin" value="" />
+          <div class="alert-grid">
+            <div class="field">
+              <label for="subscriberName">Name</label>
+              <input id="subscriberName" name="name" type="text" placeholder="Parent or player name" autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="subscriberPhone">Mobile Number</label>
+              <input id="subscriberPhone" name="phone" type="tel" placeholder="651-555-1234" autocomplete="tel" />
+            </div>
+            <div class="field full">
+              <label for="alertType">Alert Type</label>
+              <select id="alertType" name="alertType">
+                <option value="all">Practice and game changes</option>
+                <option value="games">Games only</option>
+                <option value="practices">Practices only</option>
+              </select>
+            </div>
+            <div class="field full">
+              <div class="consent-row">
+                <input id="smsConsent" name="consent" type="checkbox" value="yes" />
+                <label for="smsConsent">
+                  I want schedule update texts for SPA boys varsity soccer and understand standard carrier messaging rates may apply.
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="action-row">
+            <button id="smsSubscribeButton" type="submit">Turn On Text Alerts</button>
+          </div>
+        </form>
+        <div class="status-line" id="smsStatus"></div>
+        <p class="status-note">
+          The alert service stores only the contact details needed for schedule texts and uses the live sheet as the source of truth.
+        </p>
+        <iframe id="smsSignupFrame" name="smsSignupFrame" title="SMS signup transport" hidden></iframe>
+      </div>
+    </section>
+
+    <section class="panel panel-pad" style="margin-top: 18px;">
+      <div class="panel-head">
+        <div>
+          <div class="panel-kicker">Filters</div>
+          <h2>Find the right event fast</h2>
+        </div>
+      </div>
+      <div class="toolbar">
+        <div class="field">
+          <label for="searchInput">Search</label>
+          <input id="searchInput" type="search" placeholder="Opponent, location, notes, category..." />
+        </div>
+        <div class="field">
+          <label for="categoryFilter">Category</label>
+          <select id="categoryFilter"></select>
+        </div>
+        <div class="field">
+          <label for="teamFilter">Group</label>
+          <select id="teamFilter"></select>
+        </div>
+        <div class="field">
+          <label for="monthFilter">Month</label>
+          <select id="monthFilter"></select>
+        </div>
+        <div class="button-row">
+          <button id="refreshButton" type="button">Refresh</button>
+          <button id="resetButton" class="secondary" type="button">Reset</button>
+        </div>
+      </div>
+      <div class="status-line" id="scheduleMeta"></div>
+    </section>
+
+    <section class="schedule-wrap">
+      <div class="schedule-intro">
+        <div>
+          <div class="panel-kicker">Full Schedule</div>
+          <h2 id="resultsHeading">Schedule</h2>
+          <p id="resultsSubhead">Showing all events</p>
+        </div>
+      </div>
+      <div class="day-stack" id="scheduleDays"></div>
+      <p class="footer-note">
+        If there is ever a conflict, the Google Sheet remains the source of truth for last-minute updates.
+      </p>
+    </section>
+  </main>
+
+  <script src="./schedule-config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
