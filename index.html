@@ -443,6 +443,27 @@
       margin-top: 18px;
     }
 
+    .schedule-window {
+      max-height: 72vh;
+      padding-right: 8px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .schedule-window::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .schedule-window::-webkit-scrollbar-track {
+      border-radius: 999px;
+      background: rgba(19, 35, 27, 0.06);
+    }
+
+    .schedule-window::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(22, 71, 52, 0.32);
+    }
+
     .schedule-intro {
       display: flex;
       justify-content: space-between;
@@ -641,6 +662,11 @@
       .button-link {
         width: 100%;
       }
+
+      .schedule-window {
+        max-height: 62vh;
+        padding-right: 4px;
+      }
     }
   </style>
 </head>
@@ -800,10 +826,12 @@
         <div>
           <div class="panel-kicker">Full Schedule</div>
           <h2 id="resultsHeading">Schedule</h2>
-          <p id="resultsSubhead">Showing all events</p>
+          <p id="resultsSubhead">Showing all events in a scrollable view</p>
         </div>
       </div>
-      <div class="day-stack" id="scheduleDays"></div>
+      <div class="schedule-window">
+        <div class="day-stack" id="scheduleDays"></div>
+      </div>
       <p class="footer-note">
         If there is ever a conflict, the Google Sheet remains the source of truth for last-minute updates.
       </p>
