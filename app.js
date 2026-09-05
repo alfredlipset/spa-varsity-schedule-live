@@ -3,6 +3,7 @@ const CSV_URL = "https://docs.google.com/spreadsheets/d/1T5_MEg9U-CFIYcJ9FBcoAd2
 const DISPLAY_TIME_ZONE = "America/Chicago";
 const SCHEDULE_CONFIG = window.SPA_SCHEDULE_CONFIG || {};
 const SERVICE_URL = typeof SCHEDULE_CONFIG.serviceUrl === "string" ? SCHEDULE_CONFIG.serviceUrl.trim() : "";
+const GAME_VIDEOS = Array.isArray(SCHEDULE_CONFIG.gameVideos) ? SCHEDULE_CONFIG.gameVideos : [];
 let parsedServiceUrl = null;
 try {
   parsedServiceUrl = SERVICE_URL ? new URL(SERVICE_URL) : null;
@@ -120,6 +121,8 @@ const searchInputEl = document.getElementById("searchInput");
 const categoryFilterEl = document.getElementById("categoryFilter");
 const teamFilterEl = document.getElementById("teamFilter");
 const monthFilterEl = document.getElementById("monthFilter");
+const gameVideosCountEl = document.getElementById("gameVideosCount");
+const gameVideosListEl = document.getElementById("gameVideosList");
 const refreshButtonEl = document.getElementById("refreshButton");
 const resetButtonEl = document.getElementById("resetButton");
 const scheduleMetaEl = document.getElementById("scheduleMeta");
@@ -588,6 +591,16 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+function normalizeGameVideos(records) {
+  return records
+    .map((record) => ({
+      title: String(record?.title || "").trim(),
+      url: String(record?.url || "").trim(),
+      notes: String(record?.notes || "").trim()
+    }))
+    .filter((record) => record.title && record.url);
+}
+
 function mapLink(location) {
   if (!location) {
     return "";
@@ -757,6 +770,32 @@ function renderStats() {
   `;
 }
 
+function renderGameVideos() {
+  if (!gameVideosCountEl || !gameVideosListEl) {
+    return;
+  }
+
+  const videos = normalizeGameVideos(GAME_VIDEOS);
+  gameVideosCountEl.textContent = videos.length ? `${videos.length} link${videos.length === 1 ? "" : "s"}` : "Ready for links";
+
+  if (!videos.length) {
+    gameVideosListEl.innerHTML = `
+      <div class="empty-state">
+        No game film links are posted yet. Add items to <code>gameVideos</code> in <code>schedule-config.js</code>.
+      </div>
+    `;
+    return;
+  }
+
+  gameVideosListEl.innerHTML = videos.map((video) => `
+    <article class="resource-card">
+      <h3>${escapeHtml(video.title)}</h3>
+      ${video.notes ? `<p>${escapeHtml(video.notes)}</p>` : ""}
+      <a class="resource-link" href="${escapeHtml(video.url)}" target="_blank" rel="noreferrer">Open video link</a>
+    </article>
+  `).join("");
+}
+
 function fillSelect(selectEl, options, currentValue, allLabel) {
   selectEl.innerHTML = [
     `<option value="all">${escapeHtml(allLabel)}</option>`,
@@ -864,6 +903,7 @@ function syncUi() {
   renderNextCard();
   renderWeekStack();
   renderStats();
+  renderGameVideos();
   renderFilters();
   renderSchedule();
 }
