@@ -3,6 +3,9 @@ const CSV_URL = "https://docs.google.com/spreadsheets/d/1T5_MEg9U-CFIYcJ9FBcoAd2
 const DISPLAY_TIME_ZONE = "America/Chicago";
 const SCHEDULE_CONFIG = window.SPA_SCHEDULE_CONFIG || {};
 const SERVICE_URL = typeof SCHEDULE_CONFIG.serviceUrl === "string" ? SCHEDULE_CONFIG.serviceUrl.trim() : "";
+const PLAYER_SURVEY = SCHEDULE_CONFIG.playerSurvey && typeof SCHEDULE_CONFIG.playerSurvey === "object"
+  ? SCHEDULE_CONFIG.playerSurvey
+  : {};
 const INSTAGRAM_PROFILE_URL = typeof SCHEDULE_CONFIG.instagramProfileUrl === "string" ? SCHEDULE_CONFIG.instagramProfileUrl.trim() : "";
 const INSTAGRAM_EMBED_URL = typeof SCHEDULE_CONFIG.instagramEmbedUrl === "string" ? SCHEDULE_CONFIG.instagramEmbedUrl.trim() : "";
 const GAME_VIDEOS = Array.isArray(SCHEDULE_CONFIG.gameVideos) ? SCHEDULE_CONFIG.gameVideos : [];
@@ -111,6 +114,8 @@ const googleCalendarButtonEl = document.getElementById("googleCalendarButton");
 const copyFeedButtonEl = document.getElementById("copyFeedButton");
 const feedUrlInputEl = document.getElementById("feedUrlInput");
 const calendarStatusEl = document.getElementById("calendarStatus");
+const playerSurveyStatusEl = document.getElementById("playerSurveyStatus");
+const playerSurveyListEl = document.getElementById("playerSurveyList");
 const nextHeadingEl = document.getElementById("nextHeading");
 const nextCardEl = document.getElementById("nextCard");
 const weekStackEl = document.getElementById("weekStack");
@@ -666,6 +671,14 @@ function normalizeGameVideos(records) {
     .filter((record) => record.title && record.url);
 }
 
+function normalizePlayerSurvey(record) {
+  return {
+    title: String(record?.title || "").trim(),
+    url: String(record?.url || "").trim(),
+    notes: String(record?.notes || "").trim()
+  };
+}
+
 function renderInstagram() {
   const linkMeta = instagramLinkMeta(INSTAGRAM_PROFILE_URL);
   const embedUrl = canInlineInstagramEmbed(INSTAGRAM_EMBED_URL);
@@ -907,6 +920,32 @@ function renderGameVideos() {
   `).join("");
 }
 
+function renderPlayerSurvey() {
+  if (!playerSurveyStatusEl || !playerSurveyListEl) {
+    return;
+  }
+
+  const survey = normalizePlayerSurvey(PLAYER_SURVEY);
+  playerSurveyStatusEl.textContent = survey.url ? "Live link" : "Ready for link";
+
+  if (!survey.url) {
+    playerSurveyListEl.innerHTML = `
+      <div class="empty-state">
+        Add the daily survey link inside <code>playerSurvey</code> in <code>schedule-config.js</code>.
+      </div>
+    `;
+    return;
+  }
+
+  playerSurveyListEl.innerHTML = `
+    <article class="resource-card">
+      <h3>${escapeHtml(survey.title || "Daily Player Survey")}</h3>
+      <p>${escapeHtml(survey.notes || "Quick daily check-in for players before training.")}</p>
+      <a class="resource-link" href="${escapeHtml(survey.url)}" target="_blank" rel="noreferrer">Open survey</a>
+    </article>
+  `;
+}
+
 function fillSelect(selectEl, options, currentValue, allLabel) {
   selectEl.innerHTML = [
     `<option value="all">${escapeHtml(allLabel)}</option>`,
@@ -1015,6 +1054,7 @@ function syncUi() {
   renderNextCard();
   renderWeekStack();
   renderStats();
+  renderPlayerSurvey();
   renderGameVideos();
   renderFilters();
   renderSchedule();

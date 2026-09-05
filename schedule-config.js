@@ -3,6 +3,12 @@ window.SPA_SCHEDULE_CONFIG = {
   // 1. live Apple/Google calendar subscriptions
   // 2. SMS schedule change sign-ups
   serviceUrl: "",
+  // Daily player survey link for quick check-ins.
+  playerSurvey: {
+    title: "Daily Player Survey",
+    url: "https://docs.google.com/forms/d/e/1FAIpQLSe4cWpH9Htqx0InTRLvjx8AGlShH8YoPYQ0O0TvAZK4nh_Qfw/viewform",
+    notes: "60-second daily wellness check-in before training."
+  },
   // Add the team's Instagram profile URL here.
   instagramProfileUrl: "https://www.instagram.com/p/DcuXRJ4RNGa/",
   // Optional: add a supported embed/widget URL here for an inline feed.
