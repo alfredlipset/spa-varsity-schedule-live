@@ -639,8 +639,8 @@ function instagramLinkMeta(value) {
   if (!normalized) {
     return {
       url: "",
-      label: "Open Team Instagram",
-      status: "Instagram section added and ready for a profile link or embed URL."
+      label: "Follow the Team",
+      status: "Add the team Instagram link to turn this section on."
     };
   }
 
@@ -649,15 +649,15 @@ function instagramLinkMeta(value) {
   if (/^\/(p|reel|tv)\/[^/]+$/i.test(trimmedPath)) {
     return {
       url: `${url.origin}${trimmedPath}/`,
-      label: "Open Instagram Post",
-      status: "Instagram post is linked and ready."
+      label: "Follow the Team",
+      status: "Latest Instagram post is linked below."
     };
   }
 
   return {
     url: normalized,
-    label: "Open Team Instagram",
-    status: "Direct profile link is active. Standard Instagram profile URLs usually do not allow full-page embedding."
+    label: "Follow the Team",
+    status: "Team Instagram link is live."
   };
 }
 
@@ -697,7 +697,7 @@ function renderInstagram() {
         referrerpolicy="strict-origin-when-cross-origin"
       ></iframe>
     `;
-    instagramStatusEl.textContent = "Embedded Instagram post is active.";
+    instagramStatusEl.textContent = "Latest Instagram post is featured below.";
     return;
   }
 
