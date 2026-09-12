@@ -704,9 +704,9 @@ function renderInstagram() {
   if (linkMeta.url) {
     instagramEmbedEl.innerHTML = `
       <div class="instagram-placeholder">
-        <strong>Instagram link is ready</strong>
+        <strong>Latest team updates</strong>
         <p>
-          The page now has a dedicated Instagram spot at the top. Add a supported widget or embed URL to <code>instagramEmbedUrl</code> in <code>schedule-config.js</code> if you want posts to render inline.
+          Tap <strong>Follow the Team</strong> to open the live @spa_boyssoccer feed with the newest game-day posts, highlights, and program updates.
         </p>
       </div>
     `;
