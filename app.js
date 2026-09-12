@@ -112,7 +112,6 @@ const instagramStatusEl = document.getElementById("instagramStatus");
 const instagramEmbedEl = document.getElementById("instagramEmbed");
 const teamStatsUpdatedEl = document.getElementById("teamStatsUpdated");
 const teamStatsGridEl = document.getElementById("teamStatsGrid");
-const playerStatsListEl = document.getElementById("playerStatsList");
 const downloadCalendarButtonEl = document.getElementById("downloadCalendarButton");
 const downloadGamesCalendarButtonEl = document.getElementById("downloadGamesCalendarButton");
 const appleCalendarLinkEl = document.getElementById("appleCalendarLink");
@@ -933,17 +932,6 @@ function normalizeTeamStatCards(records) {
     .filter((record) => record.label && record.value);
 }
 
-function normalizePlayerStatCards(records) {
-  return (Array.isArray(records) ? records : [])
-    .map((record) => ({
-      name: String(record?.name || "").trim(),
-      role: String(record?.role || "").trim(),
-      detail: String(record?.detail || "").trim(),
-      stats: normalizeTeamStatCards(record?.stats)
-    }))
-    .filter((record) => record.name);
-}
-
 function normalizeGamePlans(records) {
   return (Array.isArray(records) ? records : [])
     .map((record) => ({
@@ -955,12 +943,11 @@ function normalizeGamePlans(records) {
 }
 
 function renderTeamAndPlayerStats() {
-  if (!teamStatsUpdatedEl || !teamStatsGridEl || !playerStatsListEl) {
+  if (!teamStatsUpdatedEl || !teamStatsGridEl) {
     return;
   }
 
   const teamCards = normalizeTeamStatCards(TEAM_STATS.team);
-  const players = normalizePlayerStatCards(TEAM_STATS.players);
   const updated = String(TEAM_STATS.updated || "").trim();
   teamStatsUpdatedEl.textContent = updated ? `Updated ${updated}` : "Current stats";
 
@@ -973,26 +960,6 @@ function renderTeamAndPlayerStats() {
         </div>
       `).join("")
     : `<div class="empty-state">Team statistics will be posted here as they are updated.</div>`;
-
-  playerStatsListEl.innerHTML = players.length
-    ? players.map((player) => `
-        <article class="resource-card">
-          <div class="player-stat-head">
-            <h3>${escapeHtml(player.name)}</h3>
-            ${player.role ? `<span>${escapeHtml(player.role)}</span>` : ""}
-          </div>
-          <div class="mini-stats">
-            ${player.stats.map((stat) => `
-              <div class="mini-stat">
-                <strong>${escapeHtml(stat.value)}</strong>
-                <span>${escapeHtml(stat.label)}</span>
-              </div>
-            `).join("")}
-          </div>
-          ${player.detail ? `<p>${escapeHtml(player.detail)}</p>` : ""}
-        </article>
-      `).join("")
-    : `<div class="empty-state">Player statistics will be posted here as they are updated.</div>`;
 }
 
 function renderGamePlans() {
