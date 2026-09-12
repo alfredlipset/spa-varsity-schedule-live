@@ -332,6 +332,82 @@
       gap: 16px;
     }
 
+    .resource-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .resource-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .resource-card h3,
+    .resource-card p {
+      margin: 0;
+    }
+
+    .resource-card p {
+      margin-top: 6px;
+      color: var(--muted);
+    }
+
+    .resource-link {
+      display: inline-flex;
+      margin-top: 12px;
+      color: var(--blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .player-stat-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .player-stat-head span {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini-stat {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.76);
+    }
+
+    .mini-stat strong,
+    .mini-stat span {
+      display: block;
+    }
+
+    .mini-stat strong {
+      color: var(--green);
+      font-size: 1.25rem;
+      line-height: 1.1;
+    }
+
+    .mini-stat span {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
     .utility-copy p,
     .status-copy {
       margin: 8px 0 0;
@@ -701,6 +777,10 @@
       .alert-grid {
         grid-template-columns: 1fr;
       }
+
+      .mini-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 720px) {
@@ -796,6 +876,18 @@
       </div>
     </section>
 
+    <section class="panel panel-pad" style="margin-top: 18px;">
+      <div class="panel-head">
+        <div>
+          <div class="panel-kicker">Team &amp; Player Stats</div>
+          <h2>Current season snapshot</h2>
+        </div>
+        <div class="status-line" id="teamStatsUpdated"></div>
+      </div>
+      <div class="stats-grid" id="teamStatsGrid"></div>
+      <div class="resource-list" id="playerStatsList" style="margin-top: 14px;"></div>
+    </section>
+
     <section class="utility-grid">
       <div class="panel panel-pad utility-card">
         <div class="utility-copy">
@@ -807,6 +899,7 @@
         </div>
         <div class="calendar-buttons">
           <button id="downloadCalendarButton" type="button">Download for Outlook / iCal</button>
+          <button id="downloadGamesCalendarButton" class="secondary" type="button">Download Games Only</button>
           <a id="appleCalendarLink" class="button-link secondary disabled" href="#">Apple Calendar</a>
           <button id="googleCalendarButton" class="secondary" type="button">Google Calendar</button>
           <button id="copyFeedButton" class="secondary" type="button">Copy Live Feed URL</button>
@@ -849,6 +942,17 @@
           Add or update links in <code>schedule-config.js</code> as new game film is posted.
         </p>
       </div>
+    </section>
+
+    <section class="panel panel-pad" style="margin-top: 18px;">
+      <div class="panel-head">
+        <div>
+          <div class="panel-kicker">Game Plans</div>
+          <h2>Match preparation</h2>
+        </div>
+        <div class="status-line" id="gamePlansCount"></div>
+      </div>
+      <div class="resource-list" id="gamePlansList"></div>
     </section>
 
     <section class="panel panel-pad" style="margin-top: 18px;">

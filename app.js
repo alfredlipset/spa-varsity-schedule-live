@@ -9,6 +9,8 @@ const PLAYER_SURVEY = SCHEDULE_CONFIG.playerSurvey && typeof SCHEDULE_CONFIG.pla
 const INSTAGRAM_PROFILE_URL = typeof SCHEDULE_CONFIG.instagramProfileUrl === "string" ? SCHEDULE_CONFIG.instagramProfileUrl.trim() : "";
 const INSTAGRAM_EMBED_URL = typeof SCHEDULE_CONFIG.instagramEmbedUrl === "string" ? SCHEDULE_CONFIG.instagramEmbedUrl.trim() : "";
 const GAME_VIDEOS = Array.isArray(SCHEDULE_CONFIG.gameVideos) ? SCHEDULE_CONFIG.gameVideos : [];
+const TEAM_STATS = SCHEDULE_CONFIG.stats && typeof SCHEDULE_CONFIG.stats === "object" ? SCHEDULE_CONFIG.stats : {};
+const GAME_PLANS = Array.isArray(SCHEDULE_CONFIG.gamePlans) ? SCHEDULE_CONFIG.gamePlans : [];
 let parsedServiceUrl = null;
 try {
   parsedServiceUrl = SERVICE_URL ? new URL(SERVICE_URL) : null;
@@ -108,7 +110,11 @@ const dataStatusEl = document.getElementById("dataStatus");
 const instagramLinksEl = document.getElementById("instagramLinks");
 const instagramStatusEl = document.getElementById("instagramStatus");
 const instagramEmbedEl = document.getElementById("instagramEmbed");
+const teamStatsUpdatedEl = document.getElementById("teamStatsUpdated");
+const teamStatsGridEl = document.getElementById("teamStatsGrid");
+const playerStatsListEl = document.getElementById("playerStatsList");
 const downloadCalendarButtonEl = document.getElementById("downloadCalendarButton");
+const downloadGamesCalendarButtonEl = document.getElementById("downloadGamesCalendarButton");
 const appleCalendarLinkEl = document.getElementById("appleCalendarLink");
 const googleCalendarButtonEl = document.getElementById("googleCalendarButton");
 const copyFeedButtonEl = document.getElementById("copyFeedButton");
@@ -133,6 +139,8 @@ const teamFilterEl = document.getElementById("teamFilter");
 const monthFilterEl = document.getElementById("monthFilter");
 const gameVideosCountEl = document.getElementById("gameVideosCount");
 const gameVideosListEl = document.getElementById("gameVideosList");
+const gamePlansCountEl = document.getElementById("gamePlansCount");
+const gamePlansListEl = document.getElementById("gamePlansList");
 const refreshButtonEl = document.getElementById("refreshButton");
 const resetButtonEl = document.getElementById("resetButton");
 const scheduleMetaEl = document.getElementById("scheduleMeta");
@@ -371,17 +379,38 @@ function buildIcs(events) {
   return `${lines.join("\r\n")}\r\n`;
 }
 
-function downloadIcsFile() {
-  const blob = new Blob([buildIcs(state.events)], { type: "text/calendar;charset=utf-8" });
+function downloadIcsEvents(events, filename, statusMessage) {
+  const blob = new Blob([buildIcs(events)], { type: "text/calendar;charset=utf-8" });
   const objectUrl = URL.createObjectURL(blob);
   const anchor = document.createElement("a");
   anchor.href = objectUrl;
-  anchor.download = "spa-boys-varsity-soccer-2026.ics";
+  anchor.download = filename;
   document.body.appendChild(anchor);
   anchor.click();
   anchor.remove();
   window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
-  calendarStatusEl.textContent = "Downloaded the current season calendar as an .ics file for Outlook or iCal.";
+  calendarStatusEl.textContent = statusMessage;
+}
+
+function downloadIcsFile() {
+  downloadIcsEvents(
+    state.events,
+    "spa-boys-varsity-soccer-2026.ics",
+    "Downloaded the current season calendar as an .ics file for Outlook or iCal."
+  );
+}
+
+function downloadGamesIcsFile() {
+  const games = state.events.filter((event) => event.category === "Game");
+  if (!games.length) {
+    setCalendarStatus("No game dates are available to download yet.", true);
+    return;
+  }
+  downloadIcsEvents(
+    games,
+    "spa-boys-varsity-soccer-2026-games-only.ics",
+    `Downloaded ${games.length} game dates as an .ics file for Outlook or iCal.`
+  );
 }
 
 async function copyTextToClipboard(value) {
@@ -894,6 +923,96 @@ function renderStats() {
   `;
 }
 
+function normalizeTeamStatCards(records) {
+  return (Array.isArray(records) ? records : [])
+    .map((record) => ({
+      label: String(record?.label || "").trim(),
+      value: String(record?.value || "").trim(),
+      detail: String(record?.detail || "").trim()
+    }))
+    .filter((record) => record.label && record.value);
+}
+
+function normalizePlayerStatCards(records) {
+  return (Array.isArray(records) ? records : [])
+    .map((record) => ({
+      name: String(record?.name || "").trim(),
+      role: String(record?.role || "").trim(),
+      detail: String(record?.detail || "").trim(),
+      stats: normalizeTeamStatCards(record?.stats)
+    }))
+    .filter((record) => record.name);
+}
+
+function normalizeGamePlans(records) {
+  return (Array.isArray(records) ? records : [])
+    .map((record) => ({
+      title: String(record?.title || "").trim(),
+      url: String(record?.url || "").trim(),
+      notes: String(record?.notes || "").trim()
+    }))
+    .filter((record) => record.title && record.url);
+}
+
+function renderTeamAndPlayerStats() {
+  if (!teamStatsUpdatedEl || !teamStatsGridEl || !playerStatsListEl) {
+    return;
+  }
+
+  const teamCards = normalizeTeamStatCards(TEAM_STATS.team);
+  const players = normalizePlayerStatCards(TEAM_STATS.players);
+  const updated = String(TEAM_STATS.updated || "").trim();
+  teamStatsUpdatedEl.textContent = updated ? `Updated ${updated}` : "Current stats";
+
+  teamStatsGridEl.innerHTML = teamCards.length
+    ? teamCards.map((stat) => `
+        <div class="stat-card">
+          <div class="panel-kicker">${escapeHtml(stat.label)}</div>
+          <span class="stat-number">${escapeHtml(stat.value)}</span>
+          <div class="status-line">${escapeHtml(stat.detail)}</div>
+        </div>
+      `).join("")
+    : `<div class="empty-state">Team statistics will be posted here as they are updated.</div>`;
+
+  playerStatsListEl.innerHTML = players.length
+    ? players.map((player) => `
+        <article class="resource-card">
+          <div class="player-stat-head">
+            <h3>${escapeHtml(player.name)}</h3>
+            ${player.role ? `<span>${escapeHtml(player.role)}</span>` : ""}
+          </div>
+          <div class="mini-stats">
+            ${player.stats.map((stat) => `
+              <div class="mini-stat">
+                <strong>${escapeHtml(stat.value)}</strong>
+                <span>${escapeHtml(stat.label)}</span>
+              </div>
+            `).join("")}
+          </div>
+          ${player.detail ? `<p>${escapeHtml(player.detail)}</p>` : ""}
+        </article>
+      `).join("")
+    : `<div class="empty-state">Player statistics will be posted here as they are updated.</div>`;
+}
+
+function renderGamePlans() {
+  if (!gamePlansCountEl || !gamePlansListEl) {
+    return;
+  }
+
+  const plans = normalizeGamePlans(GAME_PLANS);
+  gamePlansCountEl.textContent = plans.length ? `${plans.length} plan${plans.length === 1 ? "" : "s"}` : "Coming soon";
+  gamePlansListEl.innerHTML = plans.length
+    ? plans.map((plan) => `
+        <article class="resource-card">
+          <h3>${escapeHtml(plan.title)}</h3>
+          ${plan.notes ? `<p>${escapeHtml(plan.notes)}</p>` : ""}
+          <a class="resource-link" href="${escapeHtml(plan.url)}" target="_blank" rel="noreferrer">Open game plan</a>
+        </article>
+      `).join("")
+    : `<div class="empty-state">Game plans will be posted here when they are ready for players and families.</div>`;
+}
+
 function renderGameVideos() {
   if (!gameVideosCountEl || !gameVideosListEl) {
     return;
@@ -1054,8 +1173,10 @@ function syncUi() {
   renderNextCard();
   renderWeekStack();
   renderStats();
+  renderTeamAndPlayerStats();
   renderPlayerSurvey();
   renderGameVideos();
+  renderGamePlans();
   renderFilters();
   renderSchedule();
 }
@@ -1101,6 +1222,7 @@ async function refreshSchedule() {
 
 function wireEvents() {
   downloadCalendarButtonEl.addEventListener("click", downloadIcsFile);
+  downloadGamesCalendarButtonEl.addEventListener("click", downloadGamesIcsFile);
 
   googleCalendarButtonEl.addEventListener("click", async () => {
     const feedUrl = liveFeedUrl();

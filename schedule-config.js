@@ -14,6 +14,29 @@ window.SPA_SCHEDULE_CONFIG = {
   // Optional: add a supported embed/widget URL here for an inline feed.
   // A normal Instagram profile URL usually cannot be embedded directly.
   instagramEmbedUrl: "",
+  stats: {
+    updated: "Sep 11, 2026",
+    team: [
+      { label: "Team record", value: "7-7-1", detail: "15 matches played" },
+      { label: "Goals allowed", value: "20", detail: "1.33 per 80 minutes" },
+      { label: "Clean sheets", value: "5", detail: "33.3% of matches" }
+    ],
+    players: [
+      {
+        name: "Miles Vogenthaler",
+        role: "Goalkeeper",
+        stats: [
+          { label: "Minutes", value: "1,200" },
+          { label: "Saves", value: "47" },
+          { label: "Save %", value: "70.1%" },
+          { label: "Shutouts", value: "5" }
+        ],
+        detail: "Career: 2,300 minutes, 92 saves, 14 shutouts."
+      }
+    ]
+  },
+  // Add shared game-plan documents as they are ready for players and families.
+  gamePlans: [],
   gameVideos: [
     {
       title: "Providence Academy",
