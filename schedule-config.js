@@ -34,6 +34,16 @@ window.SPA_SCHEDULE_CONFIG = {
       title: "Breck",
       url: "https://app.veo.co/matches/20260904-spa-bvs-2026-vs-breck-v38a5934/",
       notes: "Sep 4, 2026"
+    },
+    {
+      title: "Minnehaha Academy",
+      url: "https://app.veo.co/matches/20260908-spa-bvs-2026-vs-minnehaha-vcea837a/",
+      notes: "Sep 8, 2026"
+    },
+    {
+      title: "Blake",
+      url: "https://app.veo.co/matches/20260911-spa-bvs-2026-vs-blake-v6544a1b/",
+      notes: "Sep 11, 2026"
     }
   ]
 };
