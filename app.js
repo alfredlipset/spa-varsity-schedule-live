@@ -148,8 +148,8 @@ const resultsHeadingEl = document.getElementById("resultsHeading");
 const resultsSubheadEl = document.getElementById("resultsSubhead");
 const scheduleDaysEl = document.getElementById("scheduleDays");
 
-sheetLinkEl.href = SHEET_URL;
-csvLinkEl.href = CSV_URL;
+if (sheetLinkEl) sheetLinkEl.href = SHEET_URL;
+if (csvLinkEl) csvLinkEl.href = CSV_URL;
 originInputEl.value = window.location.origin && window.location.origin.startsWith("http") ? window.location.origin : "*";
 originInputEl.defaultValue = originInputEl.value;
 
@@ -1162,7 +1162,9 @@ function renderMeta() {
   const source = state.sourceLabel;
   const syncText = state.syncedAt ? `Last sync: ${state.syncedAt}` : "Using local snapshot";
   scheduleMetaEl.textContent = `${source}. ${syncText}${state.lastError ? ` (${state.lastError})` : ""}`;
-  dataStatusEl.textContent = source === "Live Google Sheet" ? `Live sync active · ${syncText}` : `Snapshot mode · ${syncText}`;
+  if (dataStatusEl) {
+    dataStatusEl.textContent = source === "Live Google Sheet" ? `Live sync active · ${syncText}` : `Snapshot mode · ${syncText}`;
+  }
 }
 
 function syncUi() {
