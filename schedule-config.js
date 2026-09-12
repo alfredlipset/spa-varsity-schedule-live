@@ -17,9 +17,11 @@ window.SPA_SCHEDULE_CONFIG = {
   stats: {
     updated: "Sep 11, 2026",
     team: [
-      { label: "Team record", value: "7-7-1", detail: "15 matches played" },
-      { label: "Goals allowed", value: "20", detail: "1.33 per 80 minutes" },
-      { label: "Clean sheets", value: "5", detail: "33.3% of matches" }
+      { label: "Games played", value: "6", detail: "2026 season" },
+      { label: "Wins", value: "3", detail: "2026 season" },
+      { label: "Losses", value: "3", detail: "2026 season" },
+      { label: "Goals for", value: "17", detail: "2026 season" },
+      { label: "Goals against", value: "8", detail: "2026 season" }
     ]
   },
   // Add shared game-plan documents as they are ready for players and families.
