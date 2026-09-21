@@ -15,12 +15,12 @@ window.SPA_SCHEDULE_CONFIG = {
   // A normal Instagram profile URL usually cannot be embedded directly.
   instagramEmbedUrl: "https://www.instagram.com/p/DdeZI6DxEbY/",
   stats: {
-    updated: "Sep 17, 2026",
+    updated: "Sep 21, 2026",
     team: [
-      { label: "Games played", value: "5", detail: "2026 season" },
-      { label: "Wins", value: "4", detail: "2026 season" },
-      { label: "Losses", value: "1", detail: "2026 season" },
-      { label: "Goals for", value: "15", detail: "2026 season" },
+      { label: "Games played", value: "9", detail: "2026 season" },
+      { label: "Wins", value: "6", detail: "2026 season" },
+      { label: "Losses", value: "3", detail: "2026 season" },
+      { label: "Goals for", value: "23", detail: "2026 season" },
       { label: "Goals against", value: "8", detail: "2026 season" }
     ]
   },
