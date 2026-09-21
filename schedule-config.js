@@ -20,8 +20,8 @@ window.SPA_SCHEDULE_CONFIG = {
       { label: "Games played", value: "9", detail: "2026 season" },
       { label: "Wins", value: "6", detail: "2026 season" },
       { label: "Losses", value: "3", detail: "2026 season" },
-      { label: "Goals for", value: "23", detail: "2026 season" },
-      { label: "Goals against", value: "8", detail: "2026 season" }
+      { label: "Goals for", value: "24", detail: "2026 season" },
+      { label: "Goals against", value: "9", detail: "2026 season" }
     ]
   },
   // Add shared game-plan documents as they are ready for players and families.
