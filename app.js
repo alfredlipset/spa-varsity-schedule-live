@@ -46,48 +46,83 @@ const FALLBACK_CSV = `Date,Day,Category,Home/Away,Opponent,Arrival Time,Start Ti
 2026-09-01,Tuesday,Game,vs,Mounds Park Academy,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
 2026-09-02,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
 2026-09-03,Thursday,Game,@,Breck School,7:00 PM,7:30 PM,,Breck School McKnight Stadium,
-2026-09-04,Friday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before next game
+2026-09-04,Friday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; 72+ hours before next game
 2026-09-04,Friday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
 2026-09-05,Saturday,Strength & Conditioning,,Team,8:30 AM,8:45 AM,9:30 AM,St. Paul Academy and Summit School,Strength & conditioning before Saturday training
-2026-09-05,Saturday,Practice,,Team,9:30 AM,10:00 AM,11:30 AM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
-2026-09-07,Monday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-09-05,Saturday,Practice,,Team,9:30 AM,10:00 AM,12:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
+2026-09-07,Monday,Practice,,Team,3:30 PM,4:00 PM,5:30 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-09-08,Tuesday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,
 2026-09-08,Tuesday,Game,vs,Minnehaha Academy,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
 2026-09-09,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-09-10,Thursday,Team PreGame Meal ,,Team,4:00 PM,4:00 PM,4:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,Bubble Players will have meal brought to the pregame warm up.
+2026-09-10,Thursday,Bus Departs SPA,,Blake School,445PM,5:00 PM,930 PM,,
 2026-09-10,Thursday,Game,@,Blake School,6:30 PM,7:00 PM,,Blake School - Hopkins Campus Gordy Aamoth Stadium,
-2026-09-11,Friday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before next game
+2026-09-11,Friday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; 72+ hours before next game
 2026-09-11,Friday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2026-09-12,Saturday,Strength & Conditioning,,Team,8:30 AM,8:45 AM,9:30 AM,St. Paul Academy and Summit School,Strength & conditioning before Saturday training
-2026-09-12,Saturday,Practice,,Team,9:00 AM,9:30 AM,11:30 AM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
-2026-09-14,Monday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
-2026-09-14,Monday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-09-12,Saturday,Practice,,Team,1:00 PM,1:30 PM,3:30 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
+2026-09-12,Saturday,Team Dinner at Miles' Mom's Home for Players,,Please note if your player is observing Rosh Hashanah Team Dinner is optional.,5:00 PM,,8:00 PM,"680 Woodlawn Ave, St Paul, MN 55116",
+2026-09-14,Monday,CANCELED TRAINING,,Team,12:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
+2026-09-14,Monday,CANCELED TRAINING,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-09-15,Tuesday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,
 2026-09-15,Tuesday,Game,vs,Providence Academy,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
-2026-09-16,Wednesday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
-2026-09-16,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-09-16,Wednesday,Practice,,Team,4:00 PM,4:30 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-09-17,Thursday,Team PreGame Meal ,,Team,2:30 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,
+2026-09-17,Thursday,JV & V Bus Departure,,,,2:50 PM,6:30 PM,Note 630 PM is departure time back to school from MPA ,
 2026-09-17,Thursday,Game,@,Mounds Park Academy,4:00 PM,4:30 PM,,Mounds Park Academy MPA Varsity Soccer Field,
-2026-09-18,Friday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-09-18,Friday,Practice,,Team,4:30 PM,5:00 PM,7:00 PM,"1655 Livingston Ave. West St. Paul, MN 55118",Team practice
+2026-09-19,Saturday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,Meet in Cafeteria to pick up your bag lunch and snacks--make sure to eat solid breakfast and lunch --since this is a journey there and back and we want you well fueled!
+2026-09-19,Saturday,Game,,Junior Varsity Bus to Lourdes,2:30 PM,3:30 PM,7:00 PM,Note return times are departure times FROM Rochester,
+2026-09-19,Saturday,Game,,Varsity Bus to Lourdes,3:00 PM,3:30 PM,9:00 PM,Note return times are departure times FROM Rochester,
 2026-09-19,Saturday,Game,@,Rochester Lourdes,6:30 PM,7:00 PM,,RCTC Stadium,
 2026-09-21,Monday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
-2026-09-21,Monday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2026-09-22,Tuesday,Game,vs,Breck School,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-09-21,Monday,Practice,,Team,3:00 PM,3:30 PM,5:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2021-09-22,Tuesday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Handheld sandwhiches, fruit, pregame snacks provided for the team!"
+2026-09-22,Tuesday,Game - Senior Day,vs,Breck School,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
 2026-09-23,Wednesday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
 2026-09-23,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2021-09-24,Thursday,Team PreGame Meal ,,Team,4:15 PM,4:15 PM,4:45 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Rice & Protein Bowls, Fruit and Pregame Snacks provided for the team."
 2026-09-24,Thursday,Game,@,Minnehaha Academy,6:30 PM,7:00 PM,,Minnehaha Academy - Upper School Athletic Spaces Guido Kauls Field,
 2026-09-25,Friday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2021-09-26,Saturday,Team PreGame Snack,,Team,10:00 AM,10:00 AM,10:15 AM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Pregame Snacks provided--protein bars, applesauce, beef sticks, LMNT, and pickles for the team, please ensure your player hydrates well and eats a solid breakfast this am before arriving to school for the game."
 2026-09-26,Saturday,Game,vs,Cristo Rey Jesuit,11:30 AM,12:00 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
 2026-09-28,Monday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-09-28,Tuesday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Handheld sandwhiches, fruit, and pregame snacks to fuel the team!"
 2026-09-29,Tuesday,Game,vs,Blake School,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
 2026-09-30,Wednesday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
 2026-09-30,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
 2026-10-01,Thursday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2026-10-02,Friday,Game,vs,Saint Agnes,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Homecoming
+2026-10-02,Friday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Handheld sandwhiches, fruit, and pregame snacks to fuel the team!"
+2026-10-02,Friday,Game- Homecoming,vs,Saint Agnes,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Homecoming
 2026-10-03,Saturday,Strength & Conditioning,,Team,8:30 AM,8:45 AM,9:30 AM,St. Paul Academy and Summit School,Strength & conditioning before Saturday training
 2026-10-03,Saturday,Practice,,Team,9:00 AM,9:30 AM,11:30 AM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
 2026-10-05,Monday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
-2026-10-05,Monday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-10-05,Monday,Practice,,Team,4:30 PM,5:00 PM,7:00 PM,"1655 Livingston Ave. West St. Paul, MN 55118",Team practice
+2026-10-06,Tuesday,Team PreGame Meal ,,Team,3:30 PM,3:30 PM,4:00 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Rice and Protein Bowls, Fruit and Pregame Snacks to fuel the team!"
 2026-10-06,Tuesday,Game,@,St. Paul Humboldt/OWL,6:00 PM,6:30 PM,,St. Paul Humboldt High School Bob Ryan Athletic Complex,
 2026-10-07,Wednesday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
 2026-10-07,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2026-10-08,Thursday,Game,vs,St. Cloud Cathedral,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,`;
+2026-10-08,Thursday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Handheld Sandwhiches, Fruit, Pregame Snacks to fuel the team!"
+2026-10-08,Thursday,Game- Faculty Appreciation,vs,St. Cloud Cathedral,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-10-09,Friday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; 72+ hours before next game
+2026-10-09,Friday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-10-10,Saturday,Strength & Conditioning,,Team,8:30 AM,8:45 AM,9:30 AM,St. Paul Academy and Summit School,Strength & conditioning before Saturday training
+2026-10-10,Saturday,Practice,,Team,9:00 AM,9:30 AM,11:30 AM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
+2026-10-12,Monday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
+2026-10-12,Monday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-10-13,Tuesday,Game,vs,Section Round 1,,,,High Seed,Section tournament round 1
+2026-10-14,Wednesday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
+2026-10-14,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-10-15,Thursday,Game,vs,Section Quarterfinal,,,,High Seed,Section tournament quarterfinal
+2026-10-16,Friday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; 72+ hours before next game
+2026-10-16,Friday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-10-17,Saturday,Strength & Conditioning,,Team,8:30 AM,8:45 AM,9:30 AM,St. Paul Academy and Summit School,Strength & conditioning before Saturday training
+2026-10-17,Saturday,Practice,,Team,9:00 AM,9:30 AM,11:30 AM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
+2026-10-19,Monday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
+2026-10-19,Monday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-10-20,Tuesday,Game,vs,Section Semifinal,,,,High Seed,Section tournament semifinal
+2026-10-21,Wednesday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
+2026-10-21,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-10-22,Thursday,Game,,Section Final,,,,TBD - most likely Two Rivers,Section tournament final; boys and girls doubleheader`;
 
 const state = {
   events: [],
