@@ -15,12 +15,12 @@ window.SPA_SCHEDULE_CONFIG = {
   // A normal Instagram profile URL usually cannot be embedded directly.
   instagramEmbedUrl: "https://www.instagram.com/p/Ddjs2PLx7pt/",
   stats: {
-    updated: "Sep 21, 2026",
+    updated: "Sep 23, 2026",
     team: [
-      { label: "Games played", value: "9", detail: "2026 season" },
-      { label: "Wins", value: "6", detail: "2026 season" },
+      { label: "Games played", value: "10", detail: "2026 season" },
+      { label: "Wins", value: "7", detail: "2026 season" },
       { label: "Losses", value: "3", detail: "2026 season" },
-      { label: "Goals for", value: "24", detail: "2026 season" },
+      { label: "Goals for", value: "26", detail: "2026 season" },
       { label: "Goals against", value: "9", detail: "2026 season" }
     ]
   },
@@ -61,6 +61,11 @@ window.SPA_SCHEDULE_CONFIG = {
       title: "Mounds Park Academy",
       url: "https://app.veo.co/matches/20260917-spa-bvs-2026-vs-mounds-park-academy-v3e33d4f/",
       notes: "Sep 17, 2026"
+    },
+    {
+      title: "Breck",
+      url: "https://app.veo.co/matches/20260922-spa-bvs-2026-vs-breck-vffa8bb8/",
+      notes: "Sep 22, 2026 · 2–0 win"
     }
   ]
 };
