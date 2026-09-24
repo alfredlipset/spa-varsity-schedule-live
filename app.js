@@ -130,6 +130,7 @@ const state = {
   syncedAt: "",
   lastError: "",
   pendingSmsRequestId: "",
+  focusScheduleOnCurrentDay: true,
   filters: {
     search: "",
     category: "all",
@@ -180,6 +181,7 @@ const scheduleMetaEl = document.getElementById("scheduleMeta");
 const resultsHeadingEl = document.getElementById("resultsHeading");
 const resultsSubheadEl = document.getElementById("resultsSubhead");
 const scheduleDaysEl = document.getElementById("scheduleDays");
+const scheduleWindowEl = document.querySelector(".schedule-window");
 
 if (sheetLinkEl) sheetLinkEl.href = SHEET_URL;
 if (csvLinkEl) csvLinkEl.href = CSV_URL;
@@ -1112,7 +1114,7 @@ function renderSchedule() {
   grouped.forEach((events, date) => {
     const labels = [...new Set(events.map((event) => event.categoryLabel))];
     dayCards.push(`
-      <section class="day-card">
+      <section class="day-card" data-schedule-date="${escapeHtml(date)}">
         <div class="day-head">
           <div>
             <h3 class="day-date">${escapeHtml(formatDateLabel(date))}</h3>
@@ -1157,6 +1159,26 @@ function renderSchedule() {
   });
 
   scheduleDaysEl.innerHTML = dayCards.join("");
+  focusScheduleOnCurrentDay();
+}
+
+function focusScheduleOnCurrentDay() {
+  if (!state.focusScheduleOnCurrentDay || !scheduleWindowEl) {
+    return;
+  }
+
+  // Keep the full list intact, but initially position its scrollable window at
+  // today (or the next scheduled day when today has no event).
+  const today = dateKeyInZone();
+  const targetDate = state.filteredEvents.find((event) => event.date >= today)?.date || state.filteredEvents[0]?.date;
+  const target = targetDate
+    ? scheduleDaysEl.querySelector(`[data-schedule-date="${targetDate}"]`)
+    : null;
+
+  if (target) {
+    scheduleWindowEl.scrollTop = Math.max(0, target.offsetTop - scheduleDaysEl.offsetTop - 4);
+  }
+  state.focusScheduleOnCurrentDay = false;
 }
 
 function renderMeta() {
@@ -1312,6 +1334,7 @@ function wireEvents() {
 
   resetButtonEl.addEventListener("click", () => {
     state.filters = { search: "", category: "all", group: "all", month: "all" };
+    state.focusScheduleOnCurrentDay = true;
     searchInputEl.value = "";
     syncUi();
   });
