@@ -15,12 +15,12 @@ window.SPA_SCHEDULE_CONFIG = {
   // A normal Instagram profile URL usually cannot be embedded directly.
   instagramEmbedUrl: "https://www.instagram.com/p/Ddjs2PLx7pt/",
   stats: {
-    updated: "Sep 25, 2026",
+    updated: "Sep 27, 2026",
     team: [
-      { label: "Games played", value: "11", detail: "2026 season" },
-      { label: "Wins", value: "8", detail: "2026 season" },
+      { label: "Games played", value: "12", detail: "2026 season" },
+      { label: "Wins", value: "9", detail: "2026 season" },
       { label: "Losses", value: "3", detail: "2026 season" },
-      { label: "Goals for", value: "28", detail: "2026 season" },
+      { label: "Goals for", value: "31", detail: "2026 season" },
       { label: "Goals against", value: "10", detail: "2026 season" }
     ]
   },
@@ -71,6 +71,11 @@ window.SPA_SCHEDULE_CONFIG = {
       title: "Minnehaha Academy",
       url: "https://app.veo.co/matches/20260925-spa-bvs-2026-vs-minnehaha-v067a0f5/",
       notes: "Sep 24, 2026 · 2–1 win"
+    },
+    {
+      title: "Cristo Rey Jesuit",
+      url: "https://app.veo.co/matches/20260926-spa-bvs-2026-vs-christo-rey-jesuit-ved37ec2/",
+      notes: "Sep 26, 2026 · 3–0 win"
     }
   ]
 };
