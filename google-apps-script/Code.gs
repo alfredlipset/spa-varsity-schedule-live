@@ -6,6 +6,34 @@ const SUBSCRIBERS_PROPERTY = "spa_schedule_subscribers_v1";
 const SNAPSHOT_PROPERTY = "spa_schedule_snapshot_v1";
 const LAST_CHANGE_PROPERTY = "spa_schedule_last_change_v1";
 const MAX_SUBSCRIBERS = 250;
+const OUTBOX_PROPERTY = "spa_schedule_outbox_v1";
+const SITE_URL = "https://alfredlipset.github.io/spa-varsity-schedule-live/";
+
+function withServiceLock_(work) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+  try { return work(); } finally { lock.releaseLock(); }
+}
+
+// Script properties have a 9 KB per-value limit. Keep team data in small chunks.
+function readLargeProperty_(key) {
+  const props = PropertiesService.getScriptProperties();
+  const count = Number(props.getProperty(key + "_parts") || 0);
+  if (!count) return props.getProperty(key);
+  let value = "";
+  for (let i = 0; i < count; i++) value += props.getProperty(key + "_part_" + i) || "";
+  return value;
+}
+
+function writeLargeProperty_(key, value) {
+  const props = PropertiesService.getScriptProperties();
+  const oldCount = Number(props.getProperty(key + "_parts") || 0);
+  const count = Math.ceil(value.length / 1500);
+  for (let i = 0; i < count; i++) props.setProperty(key + "_part_" + i, value.slice(i * 1500, (i + 1) * 1500));
+  props.setProperty(key + "_parts", String(count));
+  for (let i = count; i < oldCount; i++) props.deleteProperty(key + "_part_" + i);
+  props.deleteProperty(key);
+}
 
 function doGet(e) {
   const params = (e && e.parameter) || {};
@@ -37,7 +65,7 @@ function doPost(e) {
       throw new Error("Unsupported action.");
     }
 
-    const result = subscribe_(params);
+    const result = withServiceLock_(function() { return subscribe_(params); });
     result.requestId = requestId;
     result.source = SERVICE_SOURCE;
     return buildResultPage_(targetOrigin, result);
@@ -67,6 +95,7 @@ function subscribe_(params) {
     throw new Error("Consent is required before enabling text alerts.");
   }
 
+  if (!isSmsConfigured_()) throw new Error("Text alerts are not available yet. Please try again later.");
   const subscribers = loadSubscribers_();
   const now = new Date().toISOString();
   const existingIndex = subscribers.findIndex(function(subscriber) {
@@ -92,8 +121,6 @@ function subscribe_(params) {
     subscribers.push(record);
   }
 
-  saveSubscribers_(subscribers);
-
   if (isSmsConfigured_()) {
     sendSms_(
       phone,
@@ -101,9 +128,10 @@ function subscribe_(params) {
         describeAlertType_(alertType) +
         ". Calendar feed: " +
         safeServiceUrl_() +
-        "?format=ics"
+        "?format=ics. Reply STOP to unsubscribe; HELP for help. Message and data rates may apply."
     );
   }
+  saveSubscribers_(subscribers);
 
   return {
     status: "ok",
@@ -368,7 +396,7 @@ function foldIcsLine_(line) {
 }
 
 function loadSubscribers_() {
-  const raw = PropertiesService.getScriptProperties().getProperty(SUBSCRIBERS_PROPERTY);
+  const raw = readLargeProperty_(SUBSCRIBERS_PROPERTY);
   if (!raw) {
     return [];
   }
@@ -382,7 +410,7 @@ function loadSubscribers_() {
 }
 
 function saveSubscribers_(subscribers) {
-  PropertiesService.getScriptProperties().setProperty(
+  writeLargeProperty_(
     SUBSCRIBERS_PROPERTY,
     JSON.stringify(subscribers)
   );
@@ -484,8 +512,15 @@ function sendSms_(to, body) {
 
   const statusCode = response.getResponseCode();
   if (statusCode < 200 || statusCode >= 300) {
-    throw new Error("Twilio send failed with status " + statusCode + ".");
+    let code = 0;
+    try { code = JSON.parse(response.getContentText()).code || 0; } catch (ignored) {}
+    const error = new Error("Twilio send failed with status " + statusCode + " (code " + code + ").");
+    if (code === 21610) error.message = "This number opted out. Reply START to the SPA soccer number, then sign up again.";
+    error.twilioCode = code;
+    throw error;
   }
+  const result = JSON.parse(response.getContentText());
+  return { sid: result.sid, status: result.status }; // Accepted/queued is not delivered.
 }
 
 function seedScheduleSnapshot() {
@@ -498,63 +533,99 @@ function seedScheduleSnapshot() {
 }
 
 function checkForScheduleChanges() {
-  const latestEvents = loadScheduleEvents_();
-  const previousEvents = loadSnapshot_();
-  saveSnapshot_(latestEvents);
-
-  if (!previousEvents.length) {
-    return {
-      status: "seeded",
-      events: latestEvents.length
-    };
-  }
-
-  const changes = diffEvents_(previousEvents, latestEvents).filter(function(change) {
-    const category = (change.after || change.before).category;
-    return category === "Practice" || category === "Game";
-  });
-
-  if (!changes.length) {
-    return {
-      status: "no_change",
-      events: latestEvents.length
-    };
-  }
-
-  const subscribers = loadSubscribers_().filter(function(subscriber) {
-    return subscriber.status === "active";
-  });
-  let sentCount = 0;
-
-  subscribers.forEach(function(subscriber) {
-    const relevant = changes.filter(function(change) {
-      return subscriberMatchesChange_(subscriber, change);
-    });
-
-    if (!relevant.length) {
-      return;
+  return withServiceLock_(function() {
+    if (!isSmsConfigured_()) throw new Error("Twilio is not configured.");
+    const latestEvents = loadScheduleEvents_();
+    const previousEvents = loadSnapshot_();
+    if (!latestEvents.length) throw new Error("Empty schedule: preserving snapshot; no cancellation alerts sent.");
+    const outbox = JSON.parse(readLargeProperty_(OUTBOX_PROPERTY) || "[]");
+    const changes = previousEvents.length ? diffEvents_(previousEvents, latestEvents).filter(function(change) {
+      const event = change.after || change.before;
+      const today = Utilities.formatDate(new Date(), DISPLAY_TIME_ZONE, "yyyy-MM-dd");
+      return (event.category === "Practice" || event.category === "Game") && event.date >= today;
+    }) : [];
+    if (changes.length) {
+      const batch = Utilities.getUuid();
+      loadSubscribers_().filter(function(s) { return s.status === "active"; }).forEach(function(s) {
+        const relevant = changes.filter(function(c) { return subscriberMatchesChange_(s, c); });
+        if (relevant.length) outbox.push({ id: batch + ":" + s.phone, phone: s.phone, body: buildChangeMessage_(relevant), attempts: 0 });
+      });
+      writeLargeProperty_(OUTBOX_PROPERTY, JSON.stringify(outbox));
+      PropertiesService.getScriptProperties().setProperty(LAST_CHANGE_PROPERTY, new Date().toISOString());
     }
+    saveSnapshot_(latestEvents);
+    return drainOutbox_(outbox);
+  });
+}
 
-    if (isSmsConfigured_()) {
-      try {
-        sendSms_(subscriber.phone, buildChangeMessage_(relevant));
-        sentCount += 1;
-      } catch (error) {
-        // Keep sending to the rest of the list even if one number fails.
+function drainOutbox_(outbox) {
+  let accepted = 0;
+  let optedOut = 0;
+  const remaining = [];
+  outbox.forEach(function(item) {
+    if (item.status === "accepted" || item.status === "skipped") return;
+    const subscriber = loadSubscribers_().find(function(s) { return s.phone === item.phone; });
+    if (!subscriber || subscriber.status !== "active") { item.status = "skipped"; return; }
+    if (item.attempts >= 5) { remaining.push(item); return; }
+    try {
+      sendSms_(item.phone, item.body);
+      accepted++;
+      item.status = "accepted";
+      writeLargeProperty_(OUTBOX_PROPERTY, JSON.stringify(outbox));
+    } catch (error) {
+      if (error.twilioCode === 21610) {
+        const subscribers = loadSubscribers_();
+        subscribers.forEach(function(s) { if (s.phone === item.phone) s.status = "opted_out"; });
+        saveSubscribers_(subscribers);
+        optedOut++;
+      } else {
+        item.attempts = (item.attempts || 0) + 1;
+        item.lastError = error.message;
+        remaining.push(item);
       }
     }
   });
+  writeLargeProperty_(OUTBOX_PROPERTY, JSON.stringify(remaining));
+  const result = { status: remaining.length ? "retry_pending" : "processed", accepted: accepted, optedOut: optedOut, pending: remaining.length };
+  console.log(JSON.stringify(result));
+  return result;
+}
 
-  PropertiesService.getScriptProperties().setProperty(
-    LAST_CHANGE_PROPERTY,
-    new Date().toISOString()
-  );
+// Owner-only editor functions: never exposed by doPost.
+// Set WEATHER_ALERT_TEXT in Script Properties, preview, then approve its exact
+// text in WEATHER_ALERT_APPROVED_TEXT. Sending clears approval to avoid repeats.
+function previewWeatherAlert() {
+  const text = String(PropertiesService.getScriptProperties().getProperty("WEATHER_ALERT_TEXT") || "").trim();
+  if (!text || text.length > 1000) throw new Error("Set WEATHER_ALERT_TEXT (1-1000 characters).");
+  const result = { message: "SPA soccer weather alert: " + text + " Reply STOP to unsubscribe.", recipients: loadSubscribers_().filter(function(s) { return s.status === "active"; }).length };
+  console.log(JSON.stringify(result));
+  return result;
+}
 
-  return {
-    status: "notified",
-    changes: changes.length,
-    subscribers: sentCount
-  };
+function sendApprovedWeatherAlert() {
+  return withServiceLock_(function() {
+    if (!isSmsConfigured_()) throw new Error("Twilio is not configured.");
+    const props = PropertiesService.getScriptProperties();
+    const preview = previewWeatherAlert();
+    const text = String(props.getProperty("WEATHER_ALERT_TEXT") || "").trim();
+    if (props.getProperty("WEATHER_ALERT_APPROVED_TEXT") !== text) throw new Error("Review preview, then set WEATHER_ALERT_APPROVED_TEXT to the exact approved text.");
+    const outbox = JSON.parse(readLargeProperty_(OUTBOX_PROPERTY) || "[]");
+    const batch = Utilities.getUuid();
+    loadSubscribers_().filter(function(s) { return s.status === "active"; }).forEach(function(s) {
+      outbox.push({ id: batch + ":" + s.phone, phone: s.phone, body: preview.message, attempts: 0 });
+    });
+    writeLargeProperty_(OUTBOX_PROPERTY, JSON.stringify(outbox));
+    props.deleteProperty("WEATHER_ALERT_APPROVED_TEXT");
+    return drainOutbox_(outbox);
+  });
+}
+
+function sendOwnerTest() {
+  const number = normalizePhone_(PropertiesService.getScriptProperties().getProperty("OWNER_TEST_NUMBER"));
+  if (!number) throw new Error("Set OWNER_TEST_NUMBER to the owner-approved test recipient.");
+  const result = sendSms_(number, "SPA BVS test only: weather and schedule text service connectivity check. No team alert was sent. Reply STOP to unsubscribe.");
+  console.log(JSON.stringify(result));
+  return result;
 }
 
 function subscriberMatchesChange_(subscriber, change) {
@@ -576,10 +647,8 @@ function buildChangeMessage_(changes) {
   if (changes.length > 3) {
     lines.push("- " + (changes.length - 3) + " more update(s) in the live calendar");
   }
-  const feedUrl = safeServiceUrl_();
-  if (feedUrl) {
-    lines.push("Calendar: " + feedUrl + "?format=ics");
-  }
+  lines.push("Schedule: " + SITE_URL);
+  lines.push("Reply STOP to unsubscribe.");
   return lines.join(" ");
 }
 
@@ -660,7 +729,7 @@ function changedFields_(before, after) {
 }
 
 function loadSnapshot_() {
-  const raw = PropertiesService.getScriptProperties().getProperty(SNAPSHOT_PROPERTY);
+  const raw = readLargeProperty_(SNAPSHOT_PROPERTY);
   if (!raw) {
     return [];
   }
@@ -674,7 +743,7 @@ function loadSnapshot_() {
 }
 
 function saveSnapshot_(events) {
-  PropertiesService.getScriptProperties().setProperty(
+  writeLargeProperty_(
     SNAPSHOT_PROPERTY,
     JSON.stringify(events)
   );
@@ -689,7 +758,7 @@ function installChangeTrigger() {
 
   ScriptApp.newTrigger("checkForScheduleChanges")
     .timeBased()
-    .everyMinutes(15)
+    .everyMinutes(1)
     .create();
 
   return {
