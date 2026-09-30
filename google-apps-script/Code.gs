@@ -758,7 +758,7 @@ function installChangeTrigger() {
 
   ScriptApp.newTrigger("checkForScheduleChanges")
     .timeBased()
-    .everyMinutes(1)
+    .everyMinutes(5)
     .create();
 
   return {

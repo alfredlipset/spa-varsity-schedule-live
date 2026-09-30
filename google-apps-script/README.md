@@ -19,7 +19,7 @@ Health verified `smsConfigured: false`, `subscriberCount: 0`. No texts sent, no 
 3. Save `Code.gs` and `appsscript.json`. Deploy a Web app executing as Me, access Anyone. Record its `/exec` URL.
 4. Run `seedScheduleSnapshot`, set `OWNER_TEST_NUMBER` privately to Max’s approved test number, then run `sendOwnerTest`. Check Twilio Message Logs for **delivered**, not just queued/accepted; confirm Max receives it. Test only Max's number until authorized.
 5. Submit an opt-in with consent via the service; test a controlled schedule change, verifying delivery, then restore it. Reply STOP and confirm further sends are blocked; reply START and resubmit opt-in to rejoin. Twilio handles these keywords; error 21610 suppresses the local subscriber on the next attempt. Verify HELP support in the sender configuration.
-6. Run `installChangeTrigger` (one-minute polling), and verify its execution.
+6. Run `installChangeTrigger` (five-minute polling to stay within Google property quotas), and verify its execution.
 7. Only then paste `/exec` into `../schedule-config.js`, commit/push, and verify the public form and delivery again.
 
 ## Immediate weather alerts
