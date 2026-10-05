@@ -75,35 +75,37 @@ const FALLBACK_CSV = `Date,Day,Category,Home/Away,Opponent,Arrival Time,Start Ti
 2026-09-19,Saturday,Game,,Varsity Bus to Lourdes,3:00 PM,3:30 PM,9:00 PM,Note return times are departure times FROM Rochester,
 2026-09-19,Saturday,Game,@,Rochester Lourdes,6:30 PM,7:00 PM,,RCTC Stadium,
 2026-09-21,Monday,Practice,,Team,3:00 PM,3:30 PM,5:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) ,Team practice
-2021-09-22,Tuesday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Handheld sandwhiches, fruit, pregame snacks provided for the team!"
+2026-09-22,Tuesday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Handheld sandwhiches, fruit, pregame snacks provided for the team!"
 2026-09-22,Tuesday,Game - Senior Day,vs,Breck School,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
 2026-09-23,Wednesday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
 2026-09-23,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2021-09-24,Thursday,Team PreGame Meal ,,Team,4:15 PM,4:15 PM,4:45 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Rice & Protein Bowls, Fruit and Pregame Snacks provided for the team."
+2026-09-24,Thursday,Team PreGame Meal ,,Team,4:15 PM,4:15 PM,4:45 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Rice & Protein Bowls, Fruit and Pregame Snacks provided for the team."
 2026-09-24,Thursday,Game,@,Minnehaha Academy,6:30 PM,7:00 PM,,Minnehaha Academy - Upper School Athletic Spaces Guido Kauls Field,
 2026-09-25,Friday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
 2026-09-26,Saturday,Team PreGame Snack,,Team,10:00 AM,10:00 AM,10:15 AM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Pregame Snacks provided--protein bars, applesauce, beef sticks, LMNT, and pickles for the team, please ensure your player hydrates well and eats a solid breakfast this am before arriving to school for the game."
 2026-09-26,Saturday,Game,vs,Cristo Rey Jesuit,11:30 AM,12:00 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
-2026-09-28,Monday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2026-09-28,Tuesday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Handheld sandwhiches, fruit, and pregame snacks to fuel the team!"
-2026-09-29,Tuesday,Game,vs,Blake School,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-09-28,Monday,Strength & Conditioning,,Team,,3:15 PM,4:00 PM,Weight Room ,
+2026-09-28,Monday,Practice,,Team,,4:00 PM,5:30 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-09-29,Tuesday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Handheld sandwhiches, fruit, and pregame snacks to fuel the team!"
+2026-09-29,Tuesday,Game,vs,Blake School,CANCELED ,CANCELED ,,CANCELED ,
 2026-09-30,Wednesday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
 2026-09-30,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
 2026-10-01,Thursday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
 2026-10-02,Friday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Handheld sandwhiches, fruit, and pregame snacks to fuel the team!"
 2026-10-02,Friday,Game- Homecoming,vs,Saint Agnes,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Homecoming
-2026-10-03,Saturday,Strength & Conditioning,,Team,8:30 AM,8:45 AM,9:30 AM,St. Paul Academy and Summit School,Strength & conditioning before Saturday training
-2026-10-03,Saturday,Practice,,Team,9:00 AM,9:30 AM,11:30 AM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
-2026-10-05,Monday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
+2026-10-03,Saturday,Strength & Conditioning,,Team,8:00 AM,8:30 AM,9:30 AM,St. Paul Academy and Summit School,Strength & conditioning before Saturday training
+2026-10-03,Saturday,Practice,,Team,8:30 AM,9:00 AM,11:00 AM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
 2026-10-05,Monday,Practice,,Team,4:30 PM,5:00 PM,7:00 PM,"1655 Livingston Ave. West St. Paul, MN 55118",Team practice
 2026-10-06,Tuesday,Team PreGame Meal ,,Team,3:30 PM,3:30 PM,4:00 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Rice and Protein Bowls, Fruit and Pregame Snacks to fuel the team!"
 2026-10-06,Tuesday,Game,@,St. Paul Humboldt/OWL,6:00 PM,6:30 PM,,St. Paul Humboldt High School Bob Ryan Athletic Complex,
 2026-10-07,Wednesday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
 2026-10-07,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2026-10-08,Thursday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Handheld Sandwhiches, Fruit, Pregame Snacks to fuel the team!"
+2026-10-08,Thursday,Team PreGame Meal ,,Team,3:00 PM,3:00 PM,3:30 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Rice and Protein Bowls, Fruit and Pregame Snacks to fuel the team!"
 2026-10-08,Thursday,Game- Faculty Appreciation,vs,St. Cloud Cathedral,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
 2026-10-09,Friday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; 72+ hours before next game
 2026-10-09,Friday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+,,,,,,,,,
+2026-10-10,Saturday,Game ,,Blake School,11:30 AM,2:00 PM,4:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,IMAC Game
 2026-10-10,Saturday,Strength & Conditioning,,Team,8:30 AM,8:45 AM,9:30 AM,St. Paul Academy and Summit School,Strength & conditioning before Saturday training
 2026-10-10,Saturday,Practice,,Team,9:00 AM,9:30 AM,11:30 AM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
 2026-10-12,Monday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
