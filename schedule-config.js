@@ -13,7 +13,7 @@ window.SPA_SCHEDULE_CONFIG = {
   instagramProfileUrl: "https://www.instagram.com/spa_boyssoccer/",
   // Optional: add a supported embed/widget URL here for an inline feed.
   // A normal Instagram profile URL usually cannot be embedded directly.
-  instagramEmbedUrl: "https://www.instagram.com/p/DeDtngfjlea/",
+  instagramEmbedUrl: "https://www.instagram.com/p/DeIcaVFx3X9/",
   stats: {
     updated: "Oct 4, 2026",
     team: [
