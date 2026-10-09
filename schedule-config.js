@@ -15,12 +15,12 @@ window.SPA_SCHEDULE_CONFIG = {
   // A normal Instagram profile URL usually cannot be embedded directly.
   instagramEmbedUrl: "https://www.instagram.com/p/DeNsOObDpNI/",
   stats: {
-    updated: "Oct 6, 2026",
+    updated: "Oct 8, 2026",
     team: [
-      { label: "Games played", value: "14", detail: "2026 season" },
-      { label: "Wins", value: "11", detail: "2026 season" },
+      { label: "Games played", value: "15", detail: "2026 season" },
+      { label: "Wins", value: "12", detail: "2026 season" },
       { label: "Losses", value: "3", detail: "2026 season" },
-      { label: "Goals for", value: "36", detail: "2026 season" },
+      { label: "Goals for", value: "37", detail: "2026 season" },
       { label: "Goals against", value: "10", detail: "2026 season" }
     ]
   },
@@ -86,6 +86,11 @@ window.SPA_SCHEDULE_CONFIG = {
       title: "St. Paul Humboldt/OWL",
       url: "https://app.veo.co/matches/20261006-spa-bvs-2026-vs-humbolt-va22c025/",
       notes: "Oct 6, 2026 · 2–0 win · Goals: John Grimsrud (assist: Graham Waibele); Caden Deardruff (assist: Erik Bjorgvinsson)."
+    },
+    {
+      title: "St. Cloud Cathedral",
+      url: "https://app.veo.co/matches/20261008-spa-bvs-2026-vs-st-cloud-cathedral-vefcd8f8/",
+      notes: "Oct 8, 2026 · 1–0 win"
     }
   ]
 };
