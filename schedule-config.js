@@ -15,13 +15,15 @@ window.SPA_SCHEDULE_CONFIG = {
   // A normal Instagram profile URL usually cannot be embedded directly.
   instagramEmbedUrl: "https://www.instagram.com/p/DeNsOObDpNI/",
   stats: {
-    updated: "Oct 8, 2026",
+    updated: "Oct 11, 2026 · Results through Oct 8; QRF as of Oct 10",
     team: [
       { label: "Games played", value: "15", detail: "2026 season" },
       { label: "Wins", value: "12", detail: "2026 season" },
       { label: "Losses", value: "3", detail: "2026 season" },
       { label: "Goals for", value: "37", detail: "2026 season" },
-      { label: "Goals against", value: "10", detail: "2026 season" }
+      { label: "Goals against", value: "10", detail: "2026 season" },
+      { label: "Class A QRF rank", value: "#4", detail: "Minnesota-Scores · Oct 10, 2026" },
+      { label: "QRF rating", value: "69.1", detail: "Minnesota-Scores · Oct 10, 2026" }
     ]
   },
   // Add shared game-plan documents as they are ready for players and families.
