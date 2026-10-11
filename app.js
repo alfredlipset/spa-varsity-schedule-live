@@ -104,26 +104,42 @@ const FALLBACK_CSV = `Date,Day,Category,Home/Away,Opponent,Arrival Time,Start Ti
 2026-10-08,Thursday,Game- Faculty Appreciation,vs,St. Cloud Cathedral,4:00 PM,4:30 PM,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
 2026-10-09,Friday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; 72+ hours before next game
 2026-10-09,Friday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-,,,,,,,,,
+2026-10-10,Saturday,Team PreGame Meal ,,Team,11:30 AM,11:30 AM,12:00 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Please have good sleep, a solid breakfast and hydrate well...we will provide Rice and Protein Bowls, Fruit and Pregame Snacks to fuel the team!"
 2026-10-10,Saturday,Game ,,Blake School,11:30 AM,2:00 PM,4:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,IMAC Game
-2026-10-10,Saturday,Strength & Conditioning,,Team,8:30 AM,8:45 AM,9:30 AM,St. Paul Academy and Summit School,Strength & conditioning before Saturday training
-2026-10-10,Saturday,Practice,,Team,9:00 AM,9:30 AM,11:30 AM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
 2026-10-12,Monday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
 2026-10-12,Monday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2026-10-13,Tuesday,Game,vs,Section Round 1,,,,High Seed,Section tournament round 1
+2026-10-13,Tuesday,Possible Section 3a Tournament Game,vs,Section Round 1,,,,High Seed,Section tournament round 1
 2026-10-14,Wednesday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
 2026-10-14,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2026-10-15,Thursday,Game,vs,Section Quarterfinal,,,,High Seed,Section tournament quarterfinal
+2026-10-15,Thursday,Possible Section 3a Tournament Game,vs,Section Quarterfinal,,,,High Seed,Section tournament quarterfinal
 2026-10-16,Friday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; 72+ hours before next game
 2026-10-16,Friday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
 2026-10-17,Saturday,Strength & Conditioning,,Team,8:30 AM,8:45 AM,9:30 AM,St. Paul Academy and Summit School,Strength & conditioning before Saturday training
 2026-10-17,Saturday,Practice,,Team,9:00 AM,9:30 AM,11:30 AM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
-2026-10-19,Monday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
-2026-10-19,Monday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2026-10-20,Tuesday,Game,vs,Section Semifinal,,,,High Seed,Section tournament semifinal
-2026-10-21,Wednesday,Strength & Conditioning,,Team,3:00 PM,3:15 PM,4:00 PM,St. Paul Academy and Summit School,Strength & conditioning before practice; placed inside 72-hour window because of schedule compression
-2026-10-21,Wednesday,Practice,,Team,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2026-10-22,Thursday,Game,,Section Final,,,,TBD - most likely Two Rivers,Section tournament final; boys and girls doubleheader`;
+2026-10-18,Sunday,All State and State Tournament Teams Celebration,,Team,1:45 PM,2:00 PM,4:00 PM,Roy Wilkins Auditorium ,
+2026-10-19,Monday,Section 3a Tournament Semifinal - at high seed ,,Team,3:30 PM,4:30 PM,7:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-10-20,Tuesday,Practice ,vs,Team,3:30 PM,4:00 PM,6:00 PM,High Seed,Section tournament semifinal
+2026-10-21,Wednesday,Section 3a Tournament Final- at St Thomas Academy,,Section Final ,4:00 PM,5:30 PM,8:00 PM,St Thomas Academy,Section tournament final; boys and girls doubleheader
+2026-10-22,Thursday,Practice ,,,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-10-23,Friday,Practice ,,,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-10-24,Saturday,Practice ,,,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-10-25,Sunday,Off ,,,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-10-26,Monday,Practice ,,,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-10-27,Tuesday,,,,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-10-28,Wednesday,,,,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-10-29,Thursday,,,,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-10-30,Friday,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-10-31,Saturday,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-11-01,Sunday,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-11-02,Monday,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-11-03,Tuesday,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-11-04,Wednesday,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-11-05,Thursday,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-11-06,Friday,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-11-07,Saturday,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+2026-11-08,Sunday,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+,,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
+,,,,,,,,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,`;
 
 const state = {
   events: [],
@@ -1208,9 +1224,41 @@ function syncUi() {
   renderSchedule();
 }
 
+// Confirmed final seeding supplements both the live Sheet and offline snapshot.
+function applySectionSeeding(records) {
+  return records.filter(record => !(record.Date === "2026-10-13" && record.Opponent === "Section Round 1"))
+    .map(record => {
+      const result = { ...record };
+      if (result.Date === "2026-10-15" && result.Opponent === "Section Quarterfinal") {
+        result.Category = "Game · Section 3A Quarterfinal";
+        result.Opponent = "Winner: Math and Science Academy / Trinity School";
+        result.Location = "St. Paul Academy and Summit School";
+        result.Notes = "No. 2 SPA hosts the No. 7/10 winner. Kickoff and arrival time TBD.";
+      }
+      if (result.Date === "2026-10-19" && /semifinal/i.test(result.Category)) {
+        result.Category = "Game · Section 3A Semifinal (if SPA advances)";
+        result.Opponent = "TBD";
+        result.Location = "High seed hosts · TBD";
+        result.Notes = "Updated date: Monday October 19. If SPA wins its quarterfinal; opponent and host TBD. Time per team calendar.";
+      }
+      if (result.Date === "2026-10-20" && /practice/i.test(result.Category)) {
+        result.Notes = "Team practice; section semifinal moved to October 19.";
+        result["Home/Away"] = "";
+        if (result.Location === "High Seed") result.Location = "Location TBD";
+      }
+      if (result.Date === "2026-10-21" && /tournament final/i.test(result.Category)) {
+        result.Category = "Game · Section 3A Final (if SPA advances)";
+        result.Opponent = "TBD";
+        result.Location = "Saint Thomas Academy";
+        result.Notes = "Updated date and location: October 21 at 5:30 PM. SPA participation depends on advancing.";
+      }
+      return result;
+    });
+}
+
 function ingestCsv(csvText, sourceLabel) {
   const records = parseCsv(csvText);
-  state.events = normalizeEvents(records);
+  state.events = normalizeEvents(applySectionSeeding(records));
   state.sourceLabel = sourceLabel;
   state.syncedAt = new Intl.DateTimeFormat("en-US", {
     timeZone: DISPLAY_TIME_ZONE,

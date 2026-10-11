@@ -15,15 +15,16 @@ window.SPA_SCHEDULE_CONFIG = {
   // A normal Instagram profile URL usually cannot be embedded directly.
   instagramEmbedUrl: "https://www.instagram.com/p/DeNsOObDpNI/",
   stats: {
-    updated: "Oct 11, 2026 · Results through Oct 8; QRF as of Oct 10",
+    updated: "Oct 11, 2026 · Final regular season / section seeding",
     team: [
-      { label: "Games played", value: "15", detail: "2026 season" },
+      { label: "Games played", value: "16", detail: "2026 season" },
       { label: "Wins", value: "12", detail: "2026 season" },
-      { label: "Losses", value: "3", detail: "2026 season" },
+      { label: "Losses", value: "4", detail: "2026 season" },
       { label: "Goals for", value: "37", detail: "2026 season" },
-      { label: "Goals against", value: "10", detail: "2026 season" },
-      { label: "Class A QRF rank", value: "#4", detail: "Minnesota-Scores · Oct 10, 2026" },
-      { label: "QRF rating", value: "69.1", detail: "Minnesota-Scores · Oct 10, 2026" }
+      { label: "Goals against", value: "12", detail: "2026 season" },
+      { label: "Class A QRF rank", value: "#4", detail: "Final regular-season QRF" },
+      { label: "QRF rating", value: "67.6", detail: "Final regular-season QRF" },
+      { label: "Section 3A seed", value: "#2", detail: "Section record: 4–0–0" }
     ]
   },
   // Add shared game-plan documents as they are ready for players and families.
@@ -93,6 +94,11 @@ window.SPA_SCHEDULE_CONFIG = {
       title: "St. Cloud Cathedral",
       url: "https://app.veo.co/matches/20261008-spa-bvs-2026-vs-st-cloud-cathedral-vefcd8f8/",
       notes: "Oct 8, 2026 · 1–0 win"
+    },
+    {
+      title: "Blake",
+      url: "https://app.veo.co/matches/20261010-spa-bvs-2026-vs-blake-v7312d79/",
+      notes: "Oct 10, 2026 · 0–2 loss · Regular-season finale"
     }
   ]
 };
