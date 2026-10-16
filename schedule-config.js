@@ -99,6 +99,11 @@ window.SPA_SCHEDULE_CONFIG = {
       title: "Blake",
       url: "https://app.veo.co/matches/20261010-spa-bvs-2026-vs-blake-v7312d79/",
       notes: "Oct 10, 2026 · 0–2 loss · Regular-season finale"
+    },
+    {
+      title: "Trinity School · Section 3A Quarterfinal",
+      url: "https://app.veo.co/matches/20261015-spa-bvs-2026-vs-trinity-v31a3cbd/",
+      notes: "Oct 15, 2026 · 7–0 win · SPA advances to the semifinals"
     }
   ]
 };
