@@ -15,16 +15,16 @@ window.SPA_SCHEDULE_CONFIG = {
   // A normal Instagram profile URL usually cannot be embedded directly.
   instagramEmbedUrl: "https://www.instagram.com/p/DefdaDwR9Nt/",
   stats: {
-    updated: "Oct 11, 2026 · Final regular season / section seeding",
+    updated: "Oct 15, 2026 · Includes 7–0 quarterfinal win vs Trinity School",
     team: [
-      { label: "Games played", value: "16", detail: "2026 season" },
-      { label: "Wins", value: "12", detail: "2026 season" },
+      { label: "Games played", value: "17", detail: "2026 season" },
+      { label: "Wins", value: "13", detail: "2026 season" },
       { label: "Losses", value: "4", detail: "2026 season" },
-      { label: "Goals for", value: "37", detail: "2026 season" },
+      { label: "Goals for", value: "44", detail: "2026 season" },
       { label: "Goals against", value: "12", detail: "2026 season" },
       { label: "Class A QRF rank", value: "#4", detail: "Final regular-season QRF" },
       { label: "QRF rating", value: "67.6", detail: "Final regular-season QRF" },
-      { label: "Section 3A seed", value: "#2", detail: "Section record: 4–0–0" }
+      { label: "Section 3A seed", value: "#2", detail: "Regular-season section record: 4–0–0" }
     ]
   },
   // Add shared game-plan documents as they are ready for players and families.
