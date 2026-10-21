@@ -114,9 +114,9 @@ const FALLBACK_CSV = `Date,Day,Category,Home/Away,Opponent,Arrival Time,Start Ti
 2026-10-15,Thursday,Team PreGame Meal ,,Team,1:30 PM,1:30 PM,2:00 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Rice and Protein Bowls, Fruit and Pregame Snacks to fuel the team!"
 2026-10-15,Thursday,Section 3A Quarterfinal vs Winner of 7 vs 10,vs,Section Quarterfinal,2:00 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Section tournament quarterfinal
 2026-10-16,Friday,Practice,,Team,2:30 PM,3:00 PM,5:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
-2026-10-17,Saturday,Strength & Conditioning,,Team,8:30 AM,8:45 AM,9:30 AM,St. Paul Academy and Summit School,Strength & conditioning before Saturday training
 2026-10-17,Saturday,Practice,,Team,9:00 AM,9:30 AM,11:30 AM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Saturday training
-2026-10-19,Monday,Section 3a Tournament Semifinal - at high seed ,,Team,3:30 PM,4:30 PM,7:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
+2026-10-19,Monday,Team PreGame Meal ,,Team,1:30 PM,1:30 PM,2:00 PM,St. Paul Academy and Summit School-Randolph (Middle/Upper Campus) Cafteria ,"Rice and Protein Bowls, Fruit and Pregame Snacks to fuel the team!"
+2026-10-19,Monday,Section 3a Tournament Semifinal - at high seed ,,Team,3:00 PM,4:00 PM,7:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,Team practice
 2026-10-20,Tuesday,Practice ,vs,Team,4:30 PM,5:00 PM,7:00 PM,High Seed,Section tournament semifinal
 2026-10-21,Wednesday,Section 3a Tournament Final- at St Thomas Academy,,Section Final ,4:00 PM,5:30 PM,8:00 PM,St Thomas Academy,Section tournament final; boys and girls doubleheader
 2026-10-22,Thursday,Practice ,,,3:30 PM,4:00 PM,6:00 PM,St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field,
@@ -1225,7 +1225,14 @@ function syncUi() {
 
 // Confirmed final seeding supplements both the live Sheet and offline snapshot.
 function applySectionSeeding(records) {
-  return records.filter(record => !(record.Date === "2026-10-13" && record.Opponent === "Section Round 1"))
+  return records.filter(record => {
+      if (record.Date === "2026-10-13" && record.Opponent === "Section Round 1") return false;
+      // SPA was eliminated October 19. Remove only the conditional final and
+      // the stale semifinal placeholder; retain independently scheduled training.
+      if (record.Date === "2026-10-21" && /tournament final/i.test(record.Category)) return false;
+      if (record.Date === "2026-10-20" && /practice/i.test(record.Category) && record.Notes === "Section tournament semifinal") return false;
+      return true;
+    })
     .map(record => {
       const result = { ...record };
       if (result.Date === "2026-10-15" && ["Section Quarterfinal", "Trinity School"].includes(result.Opponent)) {
@@ -1236,10 +1243,10 @@ function applySectionSeeding(records) {
       }
       if (result.Date === "2026-10-19" && /semifinal/i.test(result.Category)) {
         result.Category = "Game · Section 3A Semifinal";
-        if (["", "Team", "TBD"].includes(result.Opponent)) result.Opponent = "TBD";
+        if (["", "Team", "TBD", "Minnehaha Academy"].includes(result.Opponent)) result.Opponent = "Minnehaha Academy";
         result["Home/Away"] = "vs";
         result.Location = "St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field";
-        result.Notes = "SPA advanced with a 7–0 quarterfinal win over Trinity School. SPA hosts October 19; opponent TBD. Time per team calendar.";
+        result.Notes = "FINAL: SPA 1–2 Minnehaha Academy. Section 3A semifinal; season finale. Final season record: 13–5.";
       }
       if (result.Date === "2026-10-20" && /practice/i.test(result.Category)) {
         result.Notes = "Team practice; section semifinal moved to October 19.";

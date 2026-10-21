@@ -15,13 +15,13 @@ window.SPA_SCHEDULE_CONFIG = {
   // A normal Instagram profile URL usually cannot be embedded directly.
   instagramEmbedUrl: "https://www.instagram.com/p/DepyRqMRHcJ/",
   stats: {
-    updated: "Oct 15, 2026 · Includes 7–0 quarterfinal win vs Trinity School",
+    updated: "Final season totals · Oct 19, 2026 · Section 3A semifinal: SPA 1–2 Minnehaha Academy",
     team: [
-      { label: "Games played", value: "17", detail: "2026 season" },
+      { label: "Games played", value: "18", detail: "2026 season" },
       { label: "Wins", value: "13", detail: "2026 season" },
-      { label: "Losses", value: "4", detail: "2026 season" },
-      { label: "Goals for", value: "44", detail: "2026 season" },
-      { label: "Goals against", value: "12", detail: "2026 season" },
+      { label: "Losses", value: "5", detail: "2026 season" },
+      { label: "Goals for", value: "45", detail: "2026 season" },
+      { label: "Goals against", value: "14", detail: "2026 season" },
       { label: "Class A QRF rank", value: "#4", detail: "Final regular-season QRF" },
       { label: "QRF rating", value: "67.6", detail: "Final regular-season QRF" },
       { label: "Section 3A seed", value: "#2", detail: "Regular-season section record: 4–0–0" }
@@ -104,6 +104,11 @@ window.SPA_SCHEDULE_CONFIG = {
       title: "Trinity School · Section 3A Quarterfinal",
       url: "https://app.veo.co/matches/20261015-spa-bvs-2026-vs-trinity-v31a3cbd/",
       notes: "Oct 15, 2026 · 7–0 win · SPA advances to the semifinals"
+    },
+    {
+      title: "Minnehaha Academy · Section 3A Semifinal",
+      url: "https://app.veo.co/matches/20261019-spa-bvs-2026-vs-minnehaha-v9e21902/",
+      notes: "Oct 19, 2026 · 1–2 loss · Lang Field · Season finale · Final record: 13–5"
     }
   ]
 };
