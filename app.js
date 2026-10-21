@@ -1236,13 +1236,13 @@ function applySectionSeeding(records) {
     .map(record => {
       const result = { ...record };
       if (result.Date === "2026-10-15" && ["Section Quarterfinal", "Trinity School"].includes(result.Opponent)) {
-        result.Category = "Game · Section 3A Quarterfinal";
+        result.Category = "Game";
         result.Opponent = "Trinity School";
         result.Location = "St. Paul Academy and Summit School";
-        result.Notes = "FINAL: SPA 7–0 Trinity School. SPA advances to the October 19 semifinal.";
+        result.Notes = "FINAL: SPA 7–0 Trinity School. Section 3A quarterfinal. SPA advances to the October 19 semifinal.";
       }
       if (result.Date === "2026-10-19" && /semifinal/i.test(result.Category)) {
-        result.Category = "Game · Section 3A Semifinal";
+        result.Category = "Game";
         if (["", "Team", "TBD", "Minnehaha Academy"].includes(result.Opponent)) result.Opponent = "Minnehaha Academy";
         result["Home/Away"] = "vs";
         result.Location = "St. Paul Academy and Summit School - Randolph (Middle/Upper Campus) Lang Field";
