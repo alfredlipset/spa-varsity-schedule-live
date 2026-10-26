@@ -13,7 +13,7 @@ window.SPA_SCHEDULE_CONFIG = {
   instagramProfileUrl: "https://www.instagram.com/spa_boyssoccer/",
   // Optional: add a supported embed/widget URL here for an inline feed.
   // A normal Instagram profile URL usually cannot be embedded directly.
-  instagramEmbedUrl: "https://www.instagram.com/p/DepyRqMRHcJ/",
+  instagramEmbedUrl: "https://www.instagram.com/p/De8I4qYRZd_/",
   stats: {
     updated: "Final season totals · Oct 19, 2026 · Section 3A semifinal: SPA 1–2 Minnehaha Academy",
     team: [
